@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- test 1 1E88E5  1976D2 -->
+    <!-- test 2 FB8C00  F57C00 -->
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#FB8C00</color>
+    <color name="colorAccent">#4CAF50</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="unenable">#969595</color>
+
+    <color name="select_color_1">#33b5e5</color>
+    <color name="select_color_2">#99cc00</color>
+    <color name="select_color_3">#ffbb33</color>
+    <color name="select_color_4">#ff4444</color>
+    <color name="select_color_5">#aa66cc</color>
+    <color name="select_color_6">#ffffff</color>
+    <color name="select_color_7">#0099cc</color>
+    <color name="select_color_8">#669900</color>
+    <color name="select_color_9">#ff8800</color>
+    <color name="select_color_10">#cc0000</color>
+    <color name="select_color_11">#9933cc</color>
+    <color name="select_color_12">#000000</color>
+</resources>

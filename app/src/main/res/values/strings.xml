@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">表趣</string>
+    <string name="done">完成</string>
+    <string name="save">保存</string>
+    <string name="add_text">添加文字</string>
+    <string name="rebuild">重做</string>
+    <string name="create_font_size">字体大小</string>
+    <string name="create_font_color">字体颜色</string>
+    <string name="search">搜索</string>
+    <string name="saving">正在保存</string>
+    <string name="no_emoji">木有表情</string>
+    <string name="empty_emoji">木有表情耶</string>
+    <string name="share_title">发送到哪里呢?</string>
+    <string name="check_update">检查更新</string>
+    <string name="submit">提交</string>
+    <string name="feedback">反馈</string>
+    <string name="about">关于</string>
+    <string name="now_loading_img">正在载入图片</string>
+    <string name="save_success">保存成功到%1$s</string>
+    <string name="share_icon">分享</string>
+    <string name="please_save">请先保存图片</string>
+</resources>
