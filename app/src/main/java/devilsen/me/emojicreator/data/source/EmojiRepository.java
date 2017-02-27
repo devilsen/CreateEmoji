@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import java.util.List;
 
+import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.data.ImageBean;
 import rx.Observable;
 
@@ -51,11 +52,19 @@ public class EmojiRepository implements EmojiDataSource {
 
 
     @Override
-    public Observable<List<ImageBean>> getList(int page) {
-        return getLocalEmojis();
+    public Observable<List<ImageBean>> getList(int type, int page) {
+        if (type == Constant.TYPE_LOCAL) {
+            return getLocalEmojis();
+        } else {
+            return getRemoteEmojis(type, page);
+        }
     }
 
     private Observable<List<ImageBean>> getLocalEmojis() {
-        return mLocalDataSource.getList(0);
+        return mLocalDataSource.getList(0, 0);//默认全部
+    }
+
+    private Observable<List<ImageBean>> getRemoteEmojis(int type, int page) {
+        return mRemoteDataSource.getList(type, page);
     }
 }

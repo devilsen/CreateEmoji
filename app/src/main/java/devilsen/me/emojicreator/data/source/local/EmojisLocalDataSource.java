@@ -48,7 +48,7 @@ public class EmojisLocalDataSource implements EmojiDataSource {
 
 
     @Override
-    public Observable<List<ImageBean>> getList(int page) {
+    public Observable<List<ImageBean>> getList(int type, int page) {
         return getListFromLocal();
     }
 
@@ -92,32 +92,4 @@ public class EmojisLocalDataSource implements EmojiDataSource {
         return list;
     }
 
-
-//    private Observable<List<ImageBean>> getListFromLocal() {
-//        return resolver.get()
-//                .object(Photo.class)
-//                .withQuery(Query.builder()
-//                        .uri(MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-//                        .columns(MediaStore.Images.Media._ID,
-//                                MediaStore.Images.Media.DATA,
-//                                MediaStore.Images.Media.BUCKET_ID,
-//                                MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
-//                                MediaStore.Images.Media.DATE_ADDED)
-//                        .where(MIME_TYPE + "=? or " + MIME_TYPE + "=? " + "or " + MIME_TYPE + "=?")
-//                        .whereArgs("image/jpeg", "image/png", "image/gif")
-//                        .sortOrder(MediaStore.Images.Media.DATE_ADDED + " DESC")
-//                        .build())
-//                .withGetResolver(new DefaultGetResolver<Photo>() {
-//                    @NonNull
-//                    @Override
-//                    public Photo mapFromCursor(@NonNull Cursor cursor) {
-//                        return Photo.from(cursor);
-//                    }
-//                })
-//                .prepare()
-//                .asRxObservable()
-//                .filter(photo -> "createEmoji".equals(photo.getDirectory()))
-//                .map(photo -> new ImageBean(String.valueOf(photo.getId()), photo.getPath()))
-//                .toList();
-//    }
 }

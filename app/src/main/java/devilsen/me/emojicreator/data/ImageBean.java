@@ -62,7 +62,7 @@ public class ImageBean implements Parcelable{
         dest.writeInt(views);
     }
 
-    static class SizeBean{
+    public static class SizeBean{
         public int height;
         public int width;
     }

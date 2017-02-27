@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 import java.util.List;
 
+import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.Injection;
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.data.ImageBean;
@@ -41,10 +42,17 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
     private LinearLayout emptyLayout;
     private FloatingActionButton fab;
 
+    private int type = Constant.TYPE_LUCK;
+    private int page;
+
     private boolean firstVisible = true;
 
-    public static Fragment newInstance() {
-        return new ImageListFragment();
+    public static Fragment newInstance(int type) {
+        ImageListFragment imageListFragment = new ImageListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.BUNDLE_TYPE, type);
+        imageListFragment.setArguments(bundle);
+        return imageListFragment;
     }
 
     @Nullable
@@ -56,6 +64,9 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (getArguments() != null)
+            type = getArguments().getInt(Constant.BUNDLE_TYPE, Constant.TYPE_LUCK);
+
         emojiRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.list_source_sr);
         emojiRecyclerView = (RecyclerView) view.findViewById(R.id.list_source_rv);
         emptyLayout = (LinearLayout) view.findViewById(R.id.empty_layout);
@@ -120,7 +131,7 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
 
     @Override
     public void loadImage(boolean isFresh) {
-        mPresenter.loadList(0, 0);
+        mPresenter.loadList(type, 0);
     }
 
     @Override

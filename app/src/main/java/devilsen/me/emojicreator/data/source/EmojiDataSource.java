@@ -11,6 +11,6 @@ import rx.Observable;
  */
 public interface EmojiDataSource {
 
-    Observable<List<ImageBean>> getList(int page);
+    Observable<List<ImageBean>> getList(int type, int page);
 
 }

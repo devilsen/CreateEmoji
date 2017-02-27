@@ -2,208 +2,208 @@
 <items version="2" >
 
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.1/jars/classes.jar"
+        revision="25.0.2"
+        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-0fc80c0cc1fc8e5f45f49b6f4c784812c914c324.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.11.0/840897fcd7223a8143f1d9b6f69714e7be34fd50/okio-1.11.0.jar"
+        revision="25.0.2"
+        sha1="840897fcd7223a8143f1d9b6f69714e7be34fd50">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okio-1.11.0-32b80cfe0bd83487bfcff10408b9e41800b834de.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.1/jars/classes.jar"
+        revision="25.0.2"
+        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-8ea1ab175db6c09ce947215c71b42ae535bb9da4.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/25.1.1/jars/classes.jar"
         revision="25.0.2"
         sha1="a8ae156c2726ac9c56daaf4b49452ec2cdb7bba9">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-0b16b228d581f88a052881ba8a60d67e5a3eaa30.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
-        revision="25.0.2"
-        sha1="98476622f10715998eacf9240d6b479f12c66143">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okio-1.6.0-1e7bf2bd9f20b79334badf74abfdbb5dde28247d.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/jars/classes.jar"
-        revision="25.0.2"
-        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e6fc338ebde921dff1e9f305cb0fa375b70360d5.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-c2c6b70e5782009af595aa145a60318571c86fd8.jar" />
     </item>
     <item
         jar="/Users/Devilsen/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.1.1/support-annotations-25.1.1.jar"
         revision="25.0.2"
         sha1="b59b6ee8d6ecc03e672d253800430343493a6ed8">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/support-annotations-25.1.1-e206347e3116934f63bc64e672052648c6cefcb5.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/support-annotations-25.1.1-e206347e3116934f63bc64e672052648c6cefcb5.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/design/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
         revision="25.0.2"
-        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-28991b05da727b25501faafaeca16eaa4aa51336.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.1.1/jars/classes.jar"
-        revision="25.0.2"
-        sha1="02741d05d4b697fba5e279e9881aaa1da0ca7c7f">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-3fff726a8fb7c9fdc95d4e546ff812f940e4aa6e.jar" />
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okhttp-3.6.0-8a41c8f4c6b8090f7d7761ee090b6ca032b3179a.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/adapter-rxjava/2.0.0/bf61256d9868ea053e24d77669c55c80db375c15/adapter-rxjava-2.0.0.jar"
         revision="25.0.2"
         sha1="bf61256d9868ea053e24d77669c55c80db375c15">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/adapter-rxjava-2.0.0-567835de5406b1182783b4b80d6f7cfca03abf7d.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/adapter-rxjava-2.0.0-567835de5406b1182783b4b80d6f7cfca03abf7d.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.0/c4ba5371a29ac9b2ad6129b1d39ea38750043eff/gson-2.8.0.jar"
         revision="25.0.2"
-        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e717e66623f045fb7f67f0dea7c8b45c1a959ef3.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.1/jars/classes.jar"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-6aefa4fee0d9df6706a6d12b4a51f1ca063a4c86.jar" />
+        sha1="c4ba5371a29ac9b2ad6129b1d39ea38750043eff">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/gson-2.8.0-a501542c59413c07b2754ece7fd8ea132eee5d57.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.haha/haha/2.0.3/640a438d2d415c056ca6a673ac26b183b044e160/haha-2.0.3.jar"
         revision="25.0.2"
         sha1="640a438d2d415c056ca6a673ac26b183b044e160">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/haha-2.0.3-2663cdf89a97578eebd9b4cd39c2a59e6abe5ca8.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/haha-2.0.3-2663cdf89a97578eebd9b4cd39c2a59e6abe5ca8.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/io.reactivex/rxandroid/1.2.1/jars/classes.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.1/jars/classes.jar"
         revision="25.0.2"
-        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e866323c1c67c63f68daa39faee38a5992016b0e.jar" />
+        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-8d5bc288fdfdb06c2da52d627213dedd8574250e.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.7/jars/classes.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.pnikosis/materialish-progress/1.7/jars/classes.jar"
         revision="25.0.2"
         sha1="41a4edf3c43fdbce6eba27da50b17ff9933987f1">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-3a9dc20ff4fc9e147b9bb9fbb9aa22b7246392e8.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-fe4657092d61635cc4ce28ff963a4c53384ecedc.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/io.reactivex/rxandroid/1.2.1/jars/classes.jar"
+        revision="25.0.2"
+        sha1="5a2386ad9bfff580b206a7fe305cdccd00798159">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-fba26e4d7214e573b6732003837fc4f786f82ae5.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.1.1/jars/classes.jar"
         revision="25.0.2"
         sha1="e2719c102dca3a7a5b02ce07f769362da6ddb4ab">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-f8395f4cb358c0519e08ef34f1c1369bc7fee480.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.1/jars/classes.jar"
-        revision="25.0.2"
-        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-b5512e13a1a4571c18da9e64194486b7d7371891.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-5c8014b9890ff615056bf40dffc66059ccdaac74.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.pushtorefresh.storio/common/1.12.3/f85872699a8f51b416787d9ec31e4d1e469e8284/common-1.12.3.jar"
         revision="25.0.2"
         sha1="f85872699a8f51b416787d9ec31e4d1e469e8284">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/common-1.12.3-9cf5a0d9ca5a4031338778291da7660e89793fe0.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.leakcanary/leakcanary-analyzer/1.5/3277b0b0c2ace34a2edb5ddf9d1f67829561fb8f/leakcanary-analyzer-1.5.jar"
-        revision="25.0.2"
-        sha1="3277b0b0c2ace34a2edb5ddf9d1f67829561fb8f">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/leakcanary-analyzer-1.5-2737c5effe21808ef18ae5d2187b762c16e08e99.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.squareup.leakcanary/leakcanary-android/1.5/jars/classes.jar"
-        revision="25.0.2"
-        sha1="c7a2672b3122b897a0751f327929ae405ea02bf7">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-fa0227ad97a0eaa46c3930f2e70e6cafe6a9905d.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/common-1.12.3-9cf5a0d9ca5a4031338778291da7660e89793fe0.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.5.2/7446d06ec8d4f7ffcc53f1da37c95f200dcb9387/picasso-2.5.2.jar"
         revision="25.0.2"
         sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/picasso-2.5.2-0b2f2f0eb1c06b9c0a076de1f871a7d3c6bf8932.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/picasso-2.5.2-0b2f2f0eb1c06b9c0a076de1f871a7d3c6bf8932.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.leakcanary/leakcanary-analyzer/1.5/3277b0b0c2ace34a2edb5ddf9d1f67829561fb8f/leakcanary-analyzer-1.5.jar"
         revision="25.0.2"
-        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-59575fdd0e59c9fb6b980759b7bd41661d7170b3.jar" />
+        sha1="3277b0b0c2ace34a2edb5ddf9d1f67829561fb8f">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/leakcanary-analyzer-1.5-2737c5effe21808ef18ae5d2187b762c16e08e99.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.1.1/jars/classes.jar"
+        revision="25.0.2"
+        sha1="ecb496cc08dd52551fc5ec6db3bc0632e95a89bb">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-112884ba278c46613d8a91e3b85bff758b610e48.jar" />
     </item>
     <item
         jar="/Applications/Android Studio.app/Contents/gradle/m2repository/com/google/guava/guava/18.0/guava-18.0.jar"
         revision="25.0.2"
         sha1="cce0823396aa693798f8882e64213b1772032b09">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/guava-18.0-e11ced1631feb7c9800790c98fd765d3bed1b86c.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/guava-18.0-e11ced1631feb7c9800790c98fd765d3bed1b86c.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.umeng.analytics/analytics/6.0.9/5259c1d58a8f2373c2bbb7cb0ff33aee0eef4503/analytics-6.0.9.jar"
         revision="25.0.2"
         sha1="5259c1d58a8f2373c2bbb7cb0ff33aee0eef4503">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/analytics-6.0.9-3659a6c02bee220b7f2654c4bb87bf7938c68ccb.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/analytics-6.0.9-3659a6c02bee220b7f2654c4bb87bf7938c68ccb.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.2.0/41e67dba73c3347e4503761642c39d0e06ca1f2/retrofit-2.2.0.jar"
         revision="25.0.2"
-        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-82415d7c97e7ea8c164fec7658df2f8d22f839fc.jar" />
+        sha1="041e67dba73c3347e4503761642c39d0e06ca1f2">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/retrofit-2.2.0-371dc5e07188fd015853bf6a35a441ec96bce834.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.squareup.leakcanary/leakcanary-android/1.5/jars/classes.jar"
         revision="25.0.2"
-        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-2c309262b62e02713835be829c2907099fde4b32.jar" />
-    </item>
-    <item
-        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.1/b9d63507329a7178e026fc334f87587ee5070ac5/gson-2.6.1.jar"
-        revision="25.0.2"
-        sha1="b9d63507329a7178e026fc334f87587ee5070ac5">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/gson-2.6.1-eb0e5185babba506dbf0aa424a5d84dc64e99951.jar" />
+        sha1="c7a2672b3122b897a0751f327929ae405ea02bf7">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-bfa67e00aaadb61e21ee4092d0f99ee7e2f92444.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.0.0/49eb3ad545e7701234e4dd83db8dc1344b577f23/converter-gson-2.0.0.jar"
         revision="25.0.2"
         sha1="49eb3ad545e7701234e4dd83db8dc1344b577f23">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/converter-gson-2.0.0-37ec56a18f9be11a3e936bb16b4fe596d3573325.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/converter-gson-2.0.0-37ec56a18f9be11a3e936bb16b4fe596d3573325.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/logging-interceptor/3.2.0/a56f28d5b7fab623c6c1d2afa08dd496d873ac21/logging-interceptor-3.2.0.jar"
         revision="25.0.2"
         sha1="a56f28d5b7fab623c6c1d2afa08dd496d873ac21">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/logging-interceptor-3.2.0-283d3ce576e4d779deb1fa36d929398e42358d28.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/logging-interceptor-3.2.0-283d3ce576e4d779deb1fa36d929398e42358d28.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/25.1.1/jars/classes.jar"
+        revision="25.0.2"
+        sha1="c9649557905bf7a80fca9e0d54cbcb7662627860">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-8df4a5c80f1edf0d27f010443f074b62ad2f85d2.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.leakcanary/leakcanary-watcher/1.5/288101b16513158c2923ad3fb6161d1452b65e73/leakcanary-watcher-1.5.jar"
         revision="25.0.2"
         sha1="288101b16513158c2923ad3fb6161d1452b65e73">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/leakcanary-watcher-1.5-dc326fbcb5b66d81339ae1c3f8a65ebbc016b250.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/leakcanary-watcher-1.5-dc326fbcb5b66d81339ae1c3f8a65ebbc016b250.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.0/5c06d197fb7fa875ad452f562e3310dd9949d066/retrofit-2.0.0.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/design/25.1.1/jars/classes.jar"
         revision="25.0.2"
-        sha1="5c06d197fb7fa875ad452f562e3310dd9949d066">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/retrofit-2.0.0-0ddcf8194593e795460fa567a283ab3fbcf444f9.jar" />
+        sha1="cd7951e04cfb9a8bf008d544a478d9a8d8192d38">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e27ef8f5bb89ed10c652eda264b3e836c37c75df.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.2.0/f7873a2ebde246a45c2a8d6f3247108b4c88a879/okhttp-3.2.0.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.1.1/jars/classes.jar"
         revision="25.0.2"
-        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/okhttp-3.2.0-f7e351f10e491fb87fa54e1296c4909df296f6a9.jar" />
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a1f12957bc2bfec0bfe22ea90859f8b75c725164.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.1.1/jars/classes.jar"
         revision="25.0.2"
-        sha1="3e04ac8ca644ea7baddf6fdcf72e15c79e9df94a">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-97b1e704720ced2457b25d3e72f23f5683b496e9.jar" />
+        sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-ffe797f35ccb20dc93eb9fba1ae88cda0022c0f7.jar" />
     </item>
     <item
-        jar="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/exploded-aar/com.android.support/transition/25.1.1/jars/classes.jar"
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.1.1/jars/classes.jar"
         revision="25.0.2"
-        sha1="15b049fedbd8e3926bf99d9e45dfc9b2a1043bb9">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-a7cb243862c1f6d1148c7b2989a2c913bcc0c77b.jar" />
+        sha1="c03bf57f358aa10d253f21989e93bcf6014b3b17">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-e7b76d6a4a12175853680ba0fd0a134dd1c9c334.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.1.1/jars/classes.jar"
+        revision="25.0.2"
+        sha1="0d191c1a09e4892d059e5ce749e4ad4e08129e35">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-4f78db414108f5b99e62583b7570e462305754a6.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/io.reactivex/rxjava/1.1.8/f9dbae366a6a3d6b5041c5e8db0dcdfdc35c27b5/rxjava-1.1.8.jar"
         revision="25.0.2"
         sha1="f9dbae366a6a3d6b5041c5e8db0dcdfdc35c27b5">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/rxjava-1.1.8-79c303a01b00471da1ca000e384dcaa006d3be05.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/rxjava-1.1.8-79c303a01b00471da1ca000e384dcaa006d3be05.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.github.bumptech.glide/glide/3.7.0/9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4/glide-3.7.0.jar"
         revision="25.0.2"
         sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/glide-3.7.0-5b90cb98ef1e0c821c5f03c94143e9c8323310e2.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/glide-3.7.0-5b90cb98ef1e0c821c5f03c94143e9c8323310e2.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.pushtorefresh.storio/content-resolver/1.12.3/ea9c71e78106ee3b7474888f21fd9561ad11b3bd/content-resolver-1.12.3.jar"
         revision="25.0.2"
         sha1="ea9c71e78106ee3b7474888f21fd9561ad11b3bd">
-        <dex dex="/Users/Devilsen/Documents/Code/Github/EmojiCreator/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/content-resolver-1.12.3-76a5d2e5ab5cc6a94df7beba6fec9c2894e222e0.jar" />
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/content-resolver-1.12.3-76a5d2e5ab5cc6a94df7beba6fec9c2894e222e0.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.1.1/jars/classes.jar"
+        revision="25.0.2"
+        sha1="7bde4c34162092e0a77e7f12dc85ed77c484cf5c">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-c1f40e23d865cb1fc5fc5893cc0c93e8f53dec1e.jar" />
     </item>
 
 </items>

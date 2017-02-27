@@ -16,6 +16,7 @@ import java.util.List;
 
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.data.ImageBean;
+import devilsen.me.emojicreator.task.ApiService;
 import devilsen.me.emojicreator.widget.RatioImageView;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -54,16 +55,24 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         ImageBean bean = listPath.get(position);
+        String path;
 
-        BitmapFactory.decodeFile(bean.path, options);
+        if (!bean.path.startsWith("/api")) {
+            BitmapFactory.decodeFile(bean.path, options);
 
-        holder.sourceImg.setOriginalSize(options.outWidth, options.outHeight);
+            holder.sourceImg.setOriginalSize(options.outWidth, options.outHeight);
 
-//        holder.sourceImg.setOriginalSize(bean.getSize().getWidth(), bean.getSize().getHeight());
+            path = bean.path;
+        } else {
+            holder.sourceImg.setOriginalSize(bean.size.width, bean.size.height);
+
+            path = ApiService.HOST + bean.path;
+        }
+
         holder.nameTxt.setText(bean.name);
 
         Glide.with(mContext)
-                .load(bean.path)
+                .load(path)
 //                .placeholder(R.mipmap.emoji_creator_icon)
                 .error(R.mipmap.emoji_creator_icon_2)
                 .fitCenter()

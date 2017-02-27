@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.sample.BaseActivity;
 import devilsen.me.emojicreator.sample.emojilist.imagelist.ImageListFragment;
@@ -69,17 +70,17 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public Fragment getItem(int position) {
-//            if (position == 0) {
+            if (position == 0) {
+                return ImageListFragment.newInstance(Constant.TYPE_LUCK);
+            } else if (position == 1) {
+                return ImageListFragment.newInstance(Constant.TYPE_HOT);
+            } else if (position == 2) {
+                return ImageListFragment.newInstance(Constant.TYPE_LOCAL);
+            } else if (position == 3) {
+                return ImageListFragment.newInstance(Constant.TYPE_ALL);
+            } else {
                 return new ImageListFragment();
-//            } else if (position == 1) {
-//                return ImageListFragment.newInstance(Constant.LIST_TYPE_HOT);
-//            } else if (position == 2) {
-//                return new MyEmojiFragment();
-//            } else if (position == 3) {
-//                return ImageListFragment.newInstance(Constant.LIST_TYPE_DEFAULT);
-//            }else{
-//                return new ImageListFragment();
-//            }
+            }
 //            } else {
 //                return new SortFragment();
 //            }

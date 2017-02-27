@@ -42,9 +42,9 @@ public class ListPresenter implements ListContract.Presenter {
 
     @Override
     public void loadList(int type, int page) {
-        mSubscription.clear();
+//        mSubscription.clear();
 
-        Subscription subscribe = mEmojiRepository.getList(page)
+        Subscription subscribe = mEmojiRepository.getList(type, page)
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(
@@ -58,16 +58,18 @@ public class ListPresenter implements ListContract.Presenter {
                         //onComplete
                         () -> Log.e("complete", "complete")
                 );
-        mSubscription.add(subscribe);
+
+
+//        mSubscription.add(subscribe);
     }
 
     @Override
     public void subscribe() {
-        loadList(0, 0);
+//        loadList(0, 0);
     }
 
     @Override
     public void unSubscribe() {
-        mSubscription.clear();
+//        mSubscription.clear();
     }
 }
