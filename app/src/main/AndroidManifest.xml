@@ -25,6 +25,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".sample.createemoji.CreateActivity"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity android:name=".sample.search.SearchEmojiActivity"/>
+
+        <activity android:name=".sample.other.AboutActivity" />
+
+        <activity android:name=".sample.other.FeedbackActivity"/>
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58b51eb76e27a4166a000e32" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="wandoujia" />
+
     </application>
 
 </manifest>

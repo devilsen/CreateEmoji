@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".sample.emojilist.MainActivity">
-
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/list_source_sr"
@@ -19,10 +17,7 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="vertical">
-
-        </android.support.v7.widget.RecyclerView>
-
+            android:scrollbars="vertical" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -32,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginRight="15dp"
         android:src="@mipmap/ic_refresh_white_24dp"
         app:layout_scrollFlags="scroll|enterAlways" />
@@ -39,6 +35,6 @@
     <include
         android:id="@+id/empty_layout"
         layout="@layout/view_empty"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

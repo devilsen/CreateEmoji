@@ -7,7 +7,9 @@ package devilsen.me.emojicreator;
  */
 public class Constant {
 
-    public static final int OFF_SET = 10;
+    public static final int OFF_SET = 15;
+
+    public static final String SUFFIX = "?w=200&h=200";
 
     /**
      * when instance fragment the key of the bundle

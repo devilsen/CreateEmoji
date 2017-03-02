@@ -1,7 +1,6 @@
 package devilsen.me.emojicreator.sample.emojilist.imagelist;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import devilsen.me.emojicreator.data.source.EmojiRepository;
 import devilsen.me.emojicreator.util.schedulers.BaseSchedulersProvider;
@@ -42,25 +41,23 @@ public class ListPresenter implements ListContract.Presenter {
 
     @Override
     public void loadList(int type, int page) {
-//        mSubscription.clear();
+        mSubscription.clear();
 
         Subscription subscribe = mEmojiRepository.getList(type, page)
                 .subscribeOn(mSchedulerProvider.io())
                 .observeOn(mSchedulerProvider.ui())
                 .subscribe(
                         //onNext
-                        list -> {
-                            mEmojiView.showEmojis(list);//list -> mEmojiView.showEmojis(list),
-                            Log.e("list.size", list.size() + "");
-                        },
+                        mEmojiView::showEmojis,
                         //onError
-                        Throwable::printStackTrace,//e -> e.printStackTrace(),
-                        //onComplete
-                        () -> Log.e("complete", "complete")
+                        e -> {
+                            e.printStackTrace();
+                            mEmojiView.stopFresh();
+                        }
                 );
 
 
-//        mSubscription.add(subscribe);
+        mSubscription.add(subscribe);
     }
 
     @Override

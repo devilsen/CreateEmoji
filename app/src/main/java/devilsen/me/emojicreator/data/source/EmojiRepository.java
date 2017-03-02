@@ -7,9 +7,11 @@ import java.util.List;
 
 import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.data.ImageBean;
+import devilsen.me.emojicreator.task.ApiService;
 import rx.Observable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static devilsen.me.emojicreator.Constant.OFF_SET;
 
 /**
  * author : dongSen
@@ -58,6 +60,10 @@ public class EmojiRepository implements EmojiDataSource {
         } else {
             return getRemoteEmojis(type, page);
         }
+    }
+
+    public Observable<List<ImageBean>> getSearchList(String keyword, int page) {
+        return ApiService.getUrlApi().getSearchList(keyword, page * OFF_SET, OFF_SET);
     }
 
     private Observable<List<ImageBean>> getLocalEmojis() {

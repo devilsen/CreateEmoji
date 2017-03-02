@@ -23,4 +23,10 @@ public class BaseActivity extends AppCompatActivity {
         Umeng.fragmentActivityPause(this);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 }

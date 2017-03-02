@@ -35,5 +35,7 @@ ext{
     rxandroidVersion = '1.2.1'
     storioVersion = '1.12.3'
     guavaVersion = '18.0'
+    retrofitVersion = '2.2.0'
+    okhttpVersion = '3.6.0'
 
 }

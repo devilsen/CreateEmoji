@@ -1,6 +1,6 @@
 package devilsen.me.emojicreator.sample.emojilist;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,10 +15,13 @@ import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.sample.BaseActivity;
 import devilsen.me.emojicreator.sample.emojilist.imagelist.ImageListFragment;
+import devilsen.me.emojicreator.sample.other.AboutActivity;
+import devilsen.me.emojicreator.sample.other.FeedbackActivity;
+import devilsen.me.emojicreator.sample.search.SearchEmojiActivity;
 
 public class MainActivity extends BaseActivity {
 
-    private static String[] titles = new String[]{"手气不错", "热门", "我的表情", "全部", "分类"};
+    private static String[] titles = new String[]{"手气不错", "最新", "热门", "我的表情"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +29,11 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         initView();
-
     }
 
     private void initView() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        mToolbar.setTitleTextColor(Color.WHITE);
 
         TabLayout mTableLayout = (TabLayout) findViewById(R.id.tabLayout);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPager_content);
@@ -52,15 +53,26 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menu_search) {
-//            Intent intent = new Intent(MainActivity.this, SortActivity.class);
-//            intent.putExtra("activity_name", "search");
-//            startActivity(intent);
-            return true;
+        Intent intent = new Intent();
+        switch (item.getItemId()) {
+            case R.id.menu_search:
+                intent.setClass(this, SearchEmojiActivity.class);
+                break;
+            case R.id.menu_feedback:
+                intent.setClass(this, FeedbackActivity.class);
+                break;
+            case R.id.menu_about:
+                intent.setClass(this, AboutActivity.class);
+                break;
         }
-        return super.onOptionsItemSelected(item);
+        startActivity(intent);
+        return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 
     static class ViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -73,17 +85,14 @@ public class MainActivity extends BaseActivity {
             if (position == 0) {
                 return ImageListFragment.newInstance(Constant.TYPE_LUCK);
             } else if (position == 1) {
-                return ImageListFragment.newInstance(Constant.TYPE_HOT);
-            } else if (position == 2) {
-                return ImageListFragment.newInstance(Constant.TYPE_LOCAL);
-            } else if (position == 3) {
                 return ImageListFragment.newInstance(Constant.TYPE_ALL);
+            } else if (position == 2) {
+                return ImageListFragment.newInstance(Constant.TYPE_HOT);
+            } else if (position == 3) {
+                return ImageListFragment.newInstance(Constant.TYPE_LOCAL);
             } else {
-                return new ImageListFragment();
+                return ImageListFragment.newInstance(Constant.TYPE_LOCAL);
             }
-//            } else {
-//                return new SortFragment();
-//            }
         }
 
         @Override

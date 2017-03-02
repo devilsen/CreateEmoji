@@ -19,10 +19,14 @@ public interface ListContract {
 
         void loadImage(boolean isFresh);
 
+        void stopFresh();
+
         /**
          * 进入创建表情页面
          */
         void createEmoji(ImageBean imageBean);
+
+        void showLongClickDialog(ImageBean bean, int position);
     }
 
     interface Presenter extends BasePresenter {
