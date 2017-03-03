@@ -21,7 +21,7 @@ import devilsen.me.emojicreator.sample.search.SearchEmojiActivity;
 
 public class MainActivity extends BaseActivity {
 
-    private static String[] titles = new String[]{"手气不错", "最新", "热门", "我的表情"};
+    private static String[] titles = new String[]{"手气不错", "就爱胡闹", "哦哈哈哈", "个人制造"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

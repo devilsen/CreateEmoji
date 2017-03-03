@@ -15,14 +15,19 @@ import okhttp3.Response;
  */
 public class LoggingInterceptor implements Interceptor {
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(Chain chain) {
         Request request = chain.request();
 
         long t1 = System.nanoTime();
 
         Log4Utils.i("http request", String.format("Sending request %s on %s%n%s", request.url(), chain.connection(), request.headers()));
 
-        Response response = chain.proceed(request);
+        Response response = null;
+        try {
+            response = chain.proceed(request);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         long t2 = System.nanoTime();
 

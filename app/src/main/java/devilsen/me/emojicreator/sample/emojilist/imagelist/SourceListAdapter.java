@@ -1,7 +1,6 @@
 package devilsen.me.emojicreator.sample.emojilist.imagelist;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,24 +72,24 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
 
         holder.nameTxt.setText(bean.name);
 
-//        Glide.with(mContext)
-//                .load(path)
-////                .placeholder(R.mipmap.emoji_creator_icon)
-//                .error(R.mipmap.emoji_creator_icon_2)
-//                .thumbnail(0.5f)
-//                .skipMemoryCache(true)
-//                .fitCenter()
-//                .crossFade()
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(holder.sourceImg);
-
         Glide.with(mContext)
                 .load(path)
-                .asBitmap()
+                .placeholder(R.mipmap.ic_image_holder)
                 .error(R.mipmap.emoji_creator_icon_2)
+                .thumbnail(0.5f)
                 .skipMemoryCache(true)
                 .fitCenter()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.sourceImg);
+
+//        Glide.with(mContext)
+//                .load(path)
+//                .asBitmap()
+//                .error(R.mipmap.emoji_creator_icon_2)
+//                .skipMemoryCache(true)
+//                .fitCenter()
+//                .into(holder.sourceImg);
 
     }
 
@@ -108,12 +108,13 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
     }
 
     public void addData(List<ImageBean> listData) {
-        newList.addAll(listData);
+//        newList.addAll(listData);
 
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ImageDiffCallback(this.listData, newList), true);
+//        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ImageDiffCallback(this.listData, newList), true);
 
         this.listData.addAll(listData);
-        diffResult.dispatchUpdatesTo(this);
+        notifyDataSetChanged();
+//        diffResult.dispatchUpdatesTo(this);
 //        notifyDataSetChanged();
     }
 
