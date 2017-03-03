@@ -225,7 +225,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
      */
     private void initCanvas() {
         if (tempBitmap == null)
-            tempBitmap = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.ARGB_8888);
+            tempBitmap = Bitmap.createBitmap(imgWidth, imgHeight, Bitmap.Config.RGB_565);
         if (canvas == null)
             canvas = new Canvas(tempBitmap);
 
@@ -270,7 +270,8 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         int lineHeight = jokeEdit.getLineHeight();
 
         if (TextUtils.isEmpty(jokeText)) {
-            jokeText = "(>_<)";
+//            jokeText = "(>_<)";
+            jokeText = " ";
         }
 
         String[] jokeString = jokeText.split("\\n");

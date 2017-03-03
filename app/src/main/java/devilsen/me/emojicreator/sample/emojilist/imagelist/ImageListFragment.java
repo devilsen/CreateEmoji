@@ -25,6 +25,7 @@ import devilsen.me.emojicreator.sample.BaseFragment;
 import devilsen.me.emojicreator.util.EmojiUtil;
 import devilsen.me.emojicreator.util.IntentUtil;
 import devilsen.me.emojicreator.util.ShareUti;
+import devilsen.me.emojicreator.util.analyze.Umeng;
 import devilsen.me.emojicreator.widget.ListItemDialog;
 import devilsen.me.emojicreator.widget.SpacesItemDecoration;
 import rx.Observable;
@@ -170,12 +171,14 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
     public void onResume() {
         super.onResume();
         mPresenter.subscribe();
+        Umeng.fragmentResume(Constant.getNameByType(type));
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mPresenter.unSubscribe();
+        Umeng.fragmentPause(Constant.getNameByType(type));
     }
 
     @Override

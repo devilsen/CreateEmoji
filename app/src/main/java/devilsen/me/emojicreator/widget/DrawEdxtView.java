@@ -2,20 +2,20 @@ package devilsen.me.emojicreator.widget;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 /**
  * Description :
  * author : dongsen
  * Time : 2016-02-25
  */
-public class DrawEdxtView extends EditText implements OnTouchListener {
+public class DrawEdxtView extends AppCompatEditText implements OnTouchListener {
 
     private Context mContext;
 
