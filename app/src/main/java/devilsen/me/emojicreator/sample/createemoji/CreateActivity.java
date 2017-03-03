@@ -66,9 +66,9 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
 
     private float txtX, txtY;
 
-    private Bitmap sourceBitmap;
     private int imgHeight;
     private int imgWidth;
+    private Bitmap sourceBitmap;
     private Bitmap tempBitmap;
 
     private Canvas canvas;
@@ -133,7 +133,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
      */
     private void initSource() {
         name = getIntent().getStringExtra("name");
-        final String path = getIntent().getStringExtra("path");
+        String path = getIntent().getStringExtra("path");
         imgWidth = getIntent().getIntExtra("width", 100);
         imgHeight = getIntent().getIntExtra("height", 100);
 
@@ -155,7 +155,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
             Glide.with(this)
                     .load(path)
                     .asBitmap()
-                    .placeholder(R.mipmap.emoji_creator_icon)
+                    .dontAnimate()
                     .error(R.mipmap.emoji_creator_icon_2)
                     .fitCenter()
                     .into(new SimpleTarget<Bitmap>(imgWidth, imgHeight) {

@@ -19,10 +19,9 @@ import devilsen.me.emojicreator.R;
 public class SelectColorAdapter extends RecyclerView.Adapter<SelectColorAdapter.ViewHolder> {
 
     private Resources resources;
-    private Context mContext;
-    private static SelectColorListener colorListener;
-    private static CheckBox lastCheckbox;
-    public static int[] colorCollection = new int[]{
+    private SelectColorListener colorListener;
+    private CheckBox lastCheckbox;
+    private static int[] colorCollection = new int[]{
             R.color.select_color_1,
             R.color.select_color_2,
             R.color.select_color_3,
@@ -39,7 +38,7 @@ public class SelectColorAdapter extends RecyclerView.Adapter<SelectColorAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        mContext = parent.getContext();
+        Context mContext = parent.getContext();
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_select_color, parent, false);
         resources = mContext.getResources();
         return new ViewHolder(view);
@@ -55,7 +54,7 @@ public class SelectColorAdapter extends RecyclerView.Adapter<SelectColorAdapter.
         return colorCollection.length;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private View colorView;
         private CheckBox colorCb;

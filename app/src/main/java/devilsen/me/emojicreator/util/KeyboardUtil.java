@@ -29,4 +29,13 @@ public class KeyboardUtil {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+
+    /*弹出键盘*/
+    public static void showSoftInput(Context context, View view) {
+        InputMethodManager imm = (InputMethodManager) context.getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm.isActive()) {
+            imm.showSoftInput(view, 0);
+        }
+    }
 }

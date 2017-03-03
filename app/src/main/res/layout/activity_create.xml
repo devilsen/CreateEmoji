@@ -18,8 +18,8 @@
             android:id="@+id/create_source_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:gravity="center">
 
             <LinearLayout
                 android:id="@+id/create_loading_layout"
@@ -50,8 +50,7 @@
                 android:id="@+id/create_source_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter" />
+                android:layout_gravity="center" />
 
             <devilsen.me.emojicreator.widget.DrawEdxtView
                 android:id="@+id/create_source_txt"
@@ -118,9 +117,9 @@
                 android:button="@null"
                 android:drawablePadding="@dimen/create_source_bottom_dra_pad"
                 android:drawableTop="@mipmap/ic_format_shapes_black_24dp"
+                android:enabled="false"
                 android:gravity="center"
                 android:text="@string/create_font_size"
-                android:enabled="false"
                 android:textColor="@color/create_check_color"
                 android:textSize="@dimen/create_source_bottom_txt_size" />
 
@@ -132,9 +131,9 @@
                 android:button="@null"
                 android:drawablePadding="@dimen/create_source_bottom_dra_pad"
                 android:drawableTop="@mipmap/ic_color_lens_black_24dp"
+                android:enabled="false"
                 android:gravity="center"
                 android:text="@string/create_font_color"
-                android:enabled="false"
                 android:textColor="@color/create_check_color"
                 android:textSize="@dimen/create_source_bottom_txt_size" />
 
@@ -158,9 +157,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@null"
-                android:enabled="false"
                 android:drawablePadding="@dimen/create_source_bottom_dra_pad"
                 android:drawableTop="@mipmap/ic_check_black_24dp"
+                android:enabled="false"
                 android:gravity="center"
                 android:text="@string/done"
                 android:textColor="@color/create_check_color"
@@ -180,9 +179,9 @@
                     android:background="@null"
                     android:drawablePadding="@dimen/create_source_bottom_dra_pad"
                     android:drawableTop="@mipmap/ic_folder_open_black_24dp"
+                    android:enabled="false"
                     android:gravity="center"
                     android:text="@string/save"
-                    android:enabled="false"
                     android:textColor="@color/create_check_color"
                     android:textSize="@dimen/create_source_bottom_txt_size"
                     android:visibility="visible" />

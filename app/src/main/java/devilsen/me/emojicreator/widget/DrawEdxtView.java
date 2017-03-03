@@ -1,14 +1,13 @@
 package devilsen.me.emojicreator.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.view.inputmethod.InputMethodManager;
+
+import devilsen.me.emojicreator.util.KeyboardUtil;
 
 /**
  * Description :
@@ -21,12 +20,6 @@ public class DrawEdxtView extends AppCompatEditText implements OnTouchListener {
 
     private int imgWidth, imgHeight;
     private TxtLocationListener txtLocationListener;
-
-    private void getDisplayMetrics() {
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        imgWidth = dm.widthPixels;
-        imgHeight = dm.heightPixels - 50;
-    }
 
     private int lastX, lastY;
 
@@ -52,22 +45,6 @@ public class DrawEdxtView extends AppCompatEditText implements OnTouchListener {
         super(context, attrs, defStyle);
         mContext = context;
         setOnTouchListener(this);
-    }
-
-    /*隐藏键盘*/
-    public static void hideSoftInput(Activity mContext, View view) {
-        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm.isActive()) {
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    /*弹出键盘*/
-    public static void showSoftInput(Activity mContext, View view) {
-        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm.isActive()) {
-            imm.showSoftInput(view, 0);
-        }
     }
 
     /**
@@ -102,7 +79,7 @@ public class DrawEdxtView extends AppCompatEditText implements OnTouchListener {
 
                 v.setFocusable(false);
                 v.setFocusableInTouchMode(false);
-                hideSoftInput((Activity) mContext, v);
+                KeyboardUtil.hideSoftInput(mContext, v);
                 break;
             case MotionEvent.ACTION_MOVE:
                 int dx = (int) event.getRawX() - lastX;
