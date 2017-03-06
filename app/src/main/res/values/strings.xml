@@ -20,4 +20,7 @@
     <string name="share_icon">分享</string>
     <string name="please_save">请先保存图片</string>
     <string name="delete">删除</string>
+    <string name="login">登 陆</string>
+    <string name="user_name">用户名</string>
+    <string name="password">密码</string>
 </resources>

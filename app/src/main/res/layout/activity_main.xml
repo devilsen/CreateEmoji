@@ -16,24 +16,19 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:theme="@style/toolbarTheme"
-            app:popupTheme="@style/Theme.Design.Light"
-            app:layout_scrollFlags="scroll|enterAlways" />
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:popupTheme="@style/Theme.Design.Light" />
 
-        <android.support.design.widget.CollapsingToolbarLayout
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/colorPrimary"
-                app:tabGravity="center"
-                app:tabIndicatorColor="@color/white"
-                app:tabMode="scrollable"
-                app:tabSelectedTextColor="@color/white"
-                app:tabTextColor="@color/white" />
-        </android.support.design.widget.CollapsingToolbarLayout>
+            android:layout_height="48dp"
+            android:background="@color/colorPrimary"
+            app:tabGravity="center"
+            app:tabIndicatorColor="@color/white"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/white" />
 
     </android.support.design.widget.AppBarLayout>
 

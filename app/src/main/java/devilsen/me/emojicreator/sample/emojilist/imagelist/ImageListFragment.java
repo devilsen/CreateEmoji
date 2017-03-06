@@ -132,10 +132,12 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
             }
         });
 
-        if (type == Constant.TYPE_LUCK || type == Constant.TYPE_LOCAL) {
+        if (type == Constant.TYPE_LUCK) {
             loadImage(true);
             canLoadMore = false;
             firstVisible = false;
+        } else if (type == Constant.TYPE_LOCAL) {
+            canLoadMore = false;
         } else {
             fab.setVisibility(View.GONE);
             canLoadMore = true;

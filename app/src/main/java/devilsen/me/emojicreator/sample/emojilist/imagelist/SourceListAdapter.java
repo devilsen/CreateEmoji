@@ -57,7 +57,7 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
 
         String path;
 
-        if (bean.path.startsWith("http:")) {
+        if (bean.path.startsWith("https:")) {
             path = bean.path + Constant.SUFFIX;
 
             holder.sourceImg.setOriginalSize(bean.size.width, bean.size.height);

@@ -11,11 +11,11 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
+        android:name=".EmojiApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".EmojiApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".sample.emojilist.MainActivity">
             <intent-filter>
@@ -29,11 +29,15 @@
             android:name=".sample.createemoji.CreateActivity"
             android:windowSoftInputMode="adjustPan" />
 
-        <activity android:name=".sample.search.SearchEmojiActivity"/>
+        <activity
+            android:name=".sample.user.login.LoginActivity"
+            android:windowSoftInputMode="adjustNothing" />
+
+        <activity android:name=".sample.search.SearchEmojiActivity" />
 
         <activity android:name=".sample.other.AboutActivity" />
 
-        <activity android:name=".sample.other.FeedbackActivity"/>
+        <activity android:name=".sample.other.FeedbackActivity" />
 
         <meta-data
             android:name="UMENG_APPKEY"

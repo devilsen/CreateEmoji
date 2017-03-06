@@ -11,7 +11,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
  */
 public class ApiService {
 
-    public static final String HOST = "http://backblog.me";
+    public static final String HOST = "https://backblog.me";
 
     private static final String BASE_URL = HOST + "/api/";
 

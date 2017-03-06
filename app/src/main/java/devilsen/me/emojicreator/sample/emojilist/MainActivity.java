@@ -15,9 +15,9 @@ import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.sample.BaseActivity;
 import devilsen.me.emojicreator.sample.emojilist.imagelist.ImageListFragment;
-import devilsen.me.emojicreator.sample.other.AboutActivity;
 import devilsen.me.emojicreator.sample.other.FeedbackActivity;
 import devilsen.me.emojicreator.sample.search.SearchEmojiActivity;
+import devilsen.me.emojicreator.sample.user.login.LoginActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity {
                 intent.setClass(this, FeedbackActivity.class);
                 break;
             case R.id.menu_about:
-                intent.setClass(this, AboutActivity.class);
+                intent.setClass(this, LoginActivity.class);
                 break;
         }
         startActivity(intent);
@@ -74,7 +74,7 @@ public class MainActivity extends BaseActivity {
         moveTaskToBack(true);
     }
 
-    static class ViewPagerAdapter extends FragmentPagerAdapter {
+    private static class ViewPagerAdapter extends FragmentPagerAdapter {
 
         public ViewPagerAdapter(FragmentManager fm) {
             super(fm);
