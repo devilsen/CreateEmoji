@@ -1,5 +1,6 @@
 package devilsen.me.emojicreator.sample.emojilist.imagelist;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,9 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.facebook.drawee.drawable.ScalingUtils;
+import com.facebook.drawee.view.SimpleDraweeView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,6 @@ import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.data.ImageBean;
 import devilsen.me.emojicreator.task.ApiService;
 import devilsen.me.emojicreator.util.ImageSizeUtil;
-import devilsen.me.emojicreator.widget.RatioImageView;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -33,13 +34,20 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
     private List<ImageBean> listData;
     private List<ImageBean> newList;
 
-    private Fragment mContext;
     private ItemClickListener itemClickListener;
+//    private final GenericDraweeHierarchy hierarchy;
 
     public SourceListAdapter(Fragment context) {
-        mContext = context;
         this.listData = new ArrayList<>();
         this.newList = new ArrayList<>();
+
+//        GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(context.getResources());
+//        hierarchy = builder
+//                .setFadeDuration(300)
+//                .setPlaceholderImage(R.mipmap.ic_image_holder)
+//                .setFailureImage(R.mipmap.emoji_creator_icon_2)
+//                .setProgressBarImage(new ProgressBarDrawable())
+//                .build();
     }
 
     @Override
@@ -55,41 +63,34 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
         if (bean == null)
             return;
 
-        String path;
+        Uri uri;
 
         if (bean.path.startsWith("https:")) {
-            path = bean.path + Constant.SUFFIX;
-
-            holder.sourceImg.setOriginalSize(bean.size.width, bean.size.height);
+            uri = Uri.parse(bean.path + Constant.SUFFIX);
         } else if (bean.path.startsWith("/api")) {
-            path = ApiService.HOST + bean.path + Constant.SUFFIX;
-
-            holder.sourceImg.setOriginalSize(bean.size.width, bean.size.height);
+            uri = Uri.parse(ApiService.HOST + bean.path + Constant.SUFFIX);
         } else {
-            ImageSizeUtil.getInstance().decodeImageAndSetSize(bean.path, holder.sourceImg);
-            path = bean.path;
+            ImageSizeUtil.getInstance().decodeImageAndSetSize(bean.path, bean);
+            uri = Uri.fromFile(new File(bean.path));
         }
 
         holder.nameTxt.setText(bean.name);
 
-        Glide.with(mContext)
-                .load(path)
-                .placeholder(R.mipmap.ic_image_holder)
-                .error(R.mipmap.emoji_creator_icon_2)
-                .thumbnail(0.5f)
-                .skipMemoryCache(true)
-                .fitCenter()
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.sourceImg);
-
 //        Glide.with(mContext)
 //                .load(path)
-//                .asBitmap()
+//                .placeholder(R.mipmap.ic_image_holder)
 //                .error(R.mipmap.emoji_creator_icon_2)
+//                .thumbnail(0.5f)
 //                .skipMemoryCache(true)
 //                .fitCenter()
+//                .crossFade()
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                .into(holder.sourceImg);
+
+        float ratio = (float) bean.size.width / (float) bean.size.height;
+        holder.sourceImg.setAspectRatio(ratio);
+//        holder.sourceImg.setHierarchy(hierarchy);
+        holder.sourceImg.setImageURI(uri);
 
     }
 
@@ -130,13 +131,15 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
-        RatioImageView sourceImg;
+        SimpleDraweeView sourceImg;
         TextView nameTxt;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            sourceImg = (RatioImageView) itemView.findViewById(R.id.list_item_img);
+            sourceImg = (SimpleDraweeView) itemView.findViewById(R.id.list_item_img);
             nameTxt = (TextView) itemView.findViewById(R.id.list_item_name_txt);
+            sourceImg.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
+
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }

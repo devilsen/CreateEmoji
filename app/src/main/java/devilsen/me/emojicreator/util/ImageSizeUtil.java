@@ -2,7 +2,7 @@ package devilsen.me.emojicreator.util;
 
 import android.graphics.BitmapFactory;
 
-import devilsen.me.emojicreator.widget.RatioImageView;
+import devilsen.me.emojicreator.data.ImageBean;
 
 /**
  * author : dongSen
@@ -27,9 +27,9 @@ public class ImageSizeUtil {
         return INSTANCE;
     }
 
-    public void decodeImageAndSetSize(String imagePath, RatioImageView imageView) {
+    public void decodeImageAndSetSize(String imagePath, ImageBean bean) {
         BitmapFactory.decodeFile(imagePath, options);
-        imageView.setOriginalSize(options.outWidth, options.outHeight);
+        bean.size = new ImageBean.SizeBean(options.outWidth, options.outHeight);
     }
 
 

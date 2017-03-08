@@ -63,8 +63,13 @@ public class ImageBean implements Parcelable{
     }
 
     public static class SizeBean{
-        public int height;
         public int width;
+        public int height;
+
+        public SizeBean(int width,int height) {
+            this.width = width;
+            this.height = height;
+        }
     }
     
 }

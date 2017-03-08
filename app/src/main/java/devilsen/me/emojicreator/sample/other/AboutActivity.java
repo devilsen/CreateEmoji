@@ -30,7 +30,7 @@ public class AboutActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
                 AppCompatDelegate delegate = getDelegate();
-                View view = delegate.createView(parent,name,context,attrs);
+                View view = delegate.createView(parent, name, context, attrs);
                 //进行处理
 
                 return view;

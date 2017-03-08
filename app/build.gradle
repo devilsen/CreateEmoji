@@ -58,7 +58,9 @@ dependencies {
 
     //picture
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile "com.facebook.fresco:fresco:$rootProject.frescoVersion"
+    // 支持 GIF 动图，需要添加
+    compile "com.facebook.fresco:animated-gif:$rootProject.frescoVersion"
 
     //other
     compile "com.google.guava:guava:$rootProject.guavaVersion"
@@ -66,7 +68,7 @@ dependencies {
     compile 'com.umeng.analytics:analytics:latest.integration'
 
     //leakcanary
-//    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-//    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-//    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 }
