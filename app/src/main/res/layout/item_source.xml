@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            fresco:placeholderImage="@drawable/ic_account_circle_grey_700_24dp" />
+            fresco:placeholderImage="@mipmap/ic_image_holder" />
 
         <TextView
             android:id="@+id/list_item_name_txt"

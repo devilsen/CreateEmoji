@@ -18,13 +18,36 @@ import retrofit2.Converter;
  */
 final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
     private final TypeAdapter<T> adapter;
+    private final Gson gson;
 
     GsonResponseBodyConverter(Gson gson, TypeAdapter<T> adapter) {
         this.adapter = adapter;
+        this.gson = gson;
     }
 
     @Override
     public T convert(ResponseBody value) throws IOException {
+//        JsonReader jsonReader = gson.newJsonReader(value.charStream());
+//        try {
+//            jsonReader.beginObject();
+//            while (jsonReader.hasNext()){
+//                switch (jsonReader.nextName()){
+//                    case "status":
+//                        String status = jsonReader.nextString();
+//                        break;
+//                    case "datas":
+//                        jsonReader.
+//                        break;
+//                }
+//            }
+//
+//
+//
+//            return adapter.read(jsonReader);
+//        } finally {
+//            value.close();
+//        }
+
         try {
             String body = value.string();
 

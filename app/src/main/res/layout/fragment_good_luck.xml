@@ -33,7 +33,7 @@
         app:layout_scrollFlags="scroll|enterAlways" />
 
     <include
-        android:id="@+id/empty_layout"
+        android:id="@+id/layout_empty"
         layout="@layout/view_empty"
         android:visibility="gone" />
 

@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 import devilsen.me.emojicreator.Constant;
@@ -39,15 +37,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * date : 2017-02-22 17:05
  * desc : 图片列表
  */
-public class ImageListFragment extends BaseFragment implements ListContract.View {
+public class ImageListFragment extends BaseFragment implements ListContract.View, SourceListAdapter.ItemClickListener {
 
     private ListContract.Presenter mPresenter;
 
     private SourceListAdapter mAdapter;
 
-    private SwipeRefreshLayout emojiRefreshLayout;
+    private SwipeRefreshLayout mEmojiRefreshLayout;
     private StaggeredGridLayoutManager mLayoutManager;
-    private LinearLayout emptyLayout;
+    private LinearLayout mEmptyLayout;
 
     private int type = Constant.TYPE_LUCK;
     private int page;
@@ -75,9 +73,9 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
         if (getArguments() != null)
             type = getArguments().getInt(Constant.BUNDLE_TYPE, Constant.TYPE_LUCK);
 
-        emojiRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.list_source_sr);
+        mEmojiRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.list_source_sr);
         RecyclerView emojiRecyclerView = (RecyclerView) view.findViewById(R.id.list_source_rv);
-        emptyLayout = (LinearLayout) view.findViewById(R.id.empty_layout);
+        mEmptyLayout = (LinearLayout) view.findViewById(R.id.layout_empty);
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.goodluck_fab);
 
         mAdapter = new SourceListAdapter(this);
@@ -85,48 +83,20 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         emojiRecyclerView.setLayoutManager(mLayoutManager);
         emojiRecyclerView.addItemDecoration(new SpacesItemDecoration(12));
-        emojiRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        mEmojiRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
-        emojiRefreshLayout.setOnRefreshListener(() -> loadImage(true));
+        mEmojiRefreshLayout.setOnRefreshListener(() -> loadImage(true));
         fab.setOnClickListener(v -> loadImage(true));
-        mAdapter.setItemClickListener(new SourceListAdapter.ItemClickListener() {
-            @Override
-            public void onItemClick(ImageBean bean, View imageView) {
-                if (type != Constant.TYPE_LOCAL) {
-                    IntentUtil.startImg(mActivity, bean, imageView);
-                } else {
-                    ShareUti.shareImg(mActivity, bean.path, "图片");
-                }
-            }
-
-            @Override
-            public void onItemLongClick(ImageBean bean, int position) {
-                showLongClickDialog(bean, position);
-            }
-        });
+        mAdapter.setItemClickListener(this);
 
         mPresenter = new ListPresenter(Injection.provideEmojiRepository(getContext()),
                 this,
                 Injection.provideSchedulersProvider());
 
-        /**
-         * 在快速滑动时，不加载图片
-         */
         emojiRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (Math.abs(dy) > 30) {
-                    Glide.with(getContext().getApplicationContext()).pauseRequests();
-                } else {
-                    Glide.with(getContext().getApplicationContext()).resumeRequests();
-                }
-            }
-
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getContext().getApplicationContext()).resumeRequests();
                     onScroll();
                 }
             }
@@ -184,8 +154,14 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
     }
 
     @Override
-    public void showEmpty() {
-
+    public void showEmpty(boolean isEmpty) {
+        if (isEmpty) {
+            mEmojiRefreshLayout.setVisibility(View.GONE);
+            mEmptyLayout.setVisibility(View.VISIBLE);
+        } else {
+            mEmojiRefreshLayout.setVisibility(View.VISIBLE);
+            mEmptyLayout.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -196,14 +172,16 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
             mAdapter.addData(listData);
         }
 
-        emojiRefreshLayout.setRefreshing(false);
+        showEmpty(mAdapter.getListSize() == 0);
+
+        mEmojiRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void loadImage(boolean isFresh) {
         if (isFresh) {
-            if (emojiRefreshLayout != null)
-                emojiRefreshLayout.setRefreshing(true);
+            if (mEmojiRefreshLayout != null)
+                mEmojiRefreshLayout.setRefreshing(true);
             page = 0;
         }
 
@@ -213,7 +191,7 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
 
     @Override
     public void stopFresh() {
-        emojiRefreshLayout.setRefreshing(false);
+        mEmojiRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -247,5 +225,19 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
     @Override
     public void setPresenter(ListContract.Presenter presenter) {
         mPresenter = checkNotNull(presenter);
+    }
+
+    @Override
+    public void onItemClick(ImageBean bean, View imageView) {
+        if (type != Constant.TYPE_LOCAL) {
+            IntentUtil.startImg(mActivity, bean, imageView);
+        } else {
+            ShareUti.shareImg(mActivity, bean.path, "图片");
+        }
+    }
+
+    @Override
+    public void onItemLongClick(ImageBean bean, int position) {
+        showLongClickDialog(bean, position);
     }
 }

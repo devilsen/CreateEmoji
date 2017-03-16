@@ -39,6 +39,8 @@
 
         <activity android:name=".sample.other.FeedbackActivity" />
 
+        <activity android:name=".sample.uploadimage.UploadActivity" />
+
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="58b51eb76e27a4166a000e32" />

@@ -129,6 +129,13 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
         notifyItemRemoved(position);
     }
 
+    /**
+     * 获取图片的数量
+     */
+    public int getListSize() {
+        return listData == null ? 0 : listData.size();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         SimpleDraweeView sourceImg;

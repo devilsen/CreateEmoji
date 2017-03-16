@@ -18,6 +18,7 @@ import devilsen.me.emojicreator.sample.emojilist.imagelist.ImageListFragment;
 import devilsen.me.emojicreator.sample.other.AboutActivity;
 import devilsen.me.emojicreator.sample.other.FeedbackActivity;
 import devilsen.me.emojicreator.sample.search.SearchEmojiActivity;
+import devilsen.me.emojicreator.sample.uploadimage.UploadActivity;
 
 public class MainActivity extends BaseActivity {
 
@@ -63,6 +64,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.menu_about:
                 intent.setClass(this, AboutActivity.class);
+                break;
+            case R.id.menu_upload:
+                intent.setClass(this, UploadActivity.class);
                 break;
         }
         startActivity(intent);

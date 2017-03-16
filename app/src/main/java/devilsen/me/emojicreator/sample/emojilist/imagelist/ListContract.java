@@ -13,7 +13,7 @@ public interface ListContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showEmpty();
+        void showEmpty(boolean showEmpty);
 
         void showEmojis(List<ImageBean> listData);
 

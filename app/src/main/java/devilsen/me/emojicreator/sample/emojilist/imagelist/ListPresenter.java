@@ -1,9 +1,12 @@
 package devilsen.me.emojicreator.sample.emojilist.imagelist;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.List;
 
+import devilsen.me.emojicreator.EmojiApplication;
 import devilsen.me.emojicreator.data.ImageBean;
 import devilsen.me.emojicreator.data.source.EmojiRepository;
 import devilsen.me.emojicreator.util.schedulers.BaseSchedulersProvider;
@@ -53,11 +56,15 @@ public class ListPresenter implements ListContract.Presenter {
                 .subscribe(new Subscriber<List<ImageBean>>() {
                                @Override
                                public void onCompleted() {
+
                                }
 
                                @Override
                                public void onError(Throwable e) {
+                                   Toast.makeText(EmojiApplication.getInstance().getApplicationContext(), "好像没网了", Toast.LENGTH_SHORT).show();
+
                                    e.printStackTrace();
+
                                    mEmojiView.stopFresh();
                                }
 
