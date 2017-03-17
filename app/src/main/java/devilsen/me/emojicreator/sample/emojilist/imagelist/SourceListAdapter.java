@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.File;
@@ -90,6 +89,8 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
         float ratio = (float) bean.size.width / (float) bean.size.height;
         holder.sourceImg.setAspectRatio(ratio);
 //        holder.sourceImg.setHierarchy(hierarchy);
+//        sourceImg.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
+
         holder.sourceImg.setImageURI(uri);
 
     }
@@ -145,7 +146,6 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
             super(itemView);
             sourceImg = (SimpleDraweeView) itemView.findViewById(R.id.list_item_img);
             nameTxt = (TextView) itemView.findViewById(R.id.list_item_name_txt);
-            sourceImg.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
 
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);

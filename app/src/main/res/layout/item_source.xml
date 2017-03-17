@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:fresco="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:foreground="?attr/selectableItemBackground"
@@ -29,7 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            fresco:placeholderImage="@mipmap/ic_image_holder" />
+            app:placeholderImage="@mipmap/ic_image_holder"
+            app:placeholderImageScaleType="centerCrop"
+            app:failureImage="@mipmap/ic_image_holder"
+            app:failureImageScaleType="centerCrop"/>
 
         <TextView
             android:id="@+id/list_item_name_txt"

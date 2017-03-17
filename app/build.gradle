@@ -47,6 +47,7 @@ dependencies {
     compile "com.pushtorefresh.storio:content-resolver:$rootProject.storioVersion"
     compile "io.reactivex:rxjava:$rootProject.rxjavaVersion"
     compile "io.reactivex:rxandroid:$rootProject.rxandroidVersion"
+    compile "com.squareup.sqlbrite:sqlbrite:$rootProject.sqlbriteVersion"
 
     //net
     compile 'com.google.code.gson:gson:2.8.0'
