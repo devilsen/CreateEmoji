@@ -8,7 +8,7 @@ import java.util.List;
 import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.data.ImageBean;
 import devilsen.me.emojicreator.data.source.EmojiDataSource;
-import devilsen.me.emojicreator.task.ApiService;
+import devilsen.me.emojicreator.net.ApiService;
 import devilsen.me.emojicreator.util.schedulers.BaseSchedulersProvider;
 import rx.Observable;
 

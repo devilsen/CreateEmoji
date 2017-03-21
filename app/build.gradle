@@ -17,7 +17,7 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -50,7 +50,7 @@ dependencies {
     compile "com.squareup.sqlbrite:sqlbrite:$rootProject.sqlbriteVersion"
 
     //net
-    compile 'com.google.code.gson:gson:2.8.0'
+    compile "com.google.code.gson:gson:$rootProject.gsonVersion"
     compile "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
     compile "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
@@ -58,15 +58,17 @@ dependencies {
     compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.retrofitVersion"
 
     //picture
-    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     compile "com.facebook.fresco:fresco:$rootProject.frescoVersion"
     // 支持 GIF 动图，需要添加
     compile "com.facebook.fresco:animated-gif:$rootProject.frescoVersion"
 
     //other
     compile "com.google.guava:guava:$rootProject.guavaVersion"
-    compile 'com.pnikosis:materialish-progress:1.7'
+    compile "com.pnikosis:materialish-progress:$rootProject.progressVersion"
     compile 'com.umeng.analytics:analytics:latest.integration'
+
+    compile project(':ImageLib')
 
     //leakcanary
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'

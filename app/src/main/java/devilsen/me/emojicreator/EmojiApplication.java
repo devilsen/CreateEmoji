@@ -8,7 +8,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
-import devilsen.me.emojicreator.task.imagepipeline.OkHttpImagePipelineConfigFactory;
+import devilsen.me.emojicreator.net.imagepipeline.OkHttpImagePipelineConfigFactory;
 import okhttp3.OkHttpClient;
 
 /**

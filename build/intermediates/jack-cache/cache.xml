@@ -20,6 +20,12 @@
         <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-b422cce6f9fa2c9cca66ca31dff542e4541c9b73.jar" />
     </item>
     <item
+        jar="/Users/Devilsen/.android/build-cache/6ddce564b2c585ec06701da81ba2e79c9922537a/output/jars/classes.jar"
+        revision="25.0.2"
+        sha1="d2fc47d835e217890cbe631b0bb447786d8544aa">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-2ae3236e1ad757664a0325150155ab343d94d378.jar" />
+    </item>
+    <item
         jar="/Users/Devilsen/.android/build-cache/5efb202f67db423b67d3fbca8bd318f74d1053a4/output/jars/classes.jar"
         revision="25.0.2"
         sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
@@ -192,6 +198,12 @@
         revision="25.0.2"
         sha1="0fb891e8f0cfba0513043a7bb357513d229ca2cd">
         <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-f416a1a305bd511081e212d8ddeca7806cb8791f.jar" />
+    </item>
+    <item
+        jar="/Users/Devilsen/Documents/Code/Github/CreateEmoji/ImageLib/build/intermediates/bundles/default/classes.jar"
+        revision="25.0.2"
+        sha1="be0673a93998f95fef9a9b73f2b5d7d6e48adc85">
+        <dex dex="/Users/Devilsen/Documents/Code/Github/CreateEmoji/app/build/intermediates/transforms/preJackPackagedLibraries/debug/jars/8000/1f/classes-03fa4742eebceaac5fe0559e2ea59ea3d7eef717.jar" />
     </item>
     <item
         jar="/Users/Devilsen/.gradle/caches/modules-2/files-2.1/com.squareup.leakcanary/leakcanary-analyzer/1.5/3277b0b0c2ace34a2edb5ddf9d1f67829561fb8f/leakcanary-analyzer-1.5.jar"

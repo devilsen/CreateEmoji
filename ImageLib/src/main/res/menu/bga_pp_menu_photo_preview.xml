@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_photo_preview_select"
+        android:title="@string/select_from_phone"
+        app:showAsAction="collapseActionView" />
+
+    <item
+        android:id="@+id/item_photo_preview_download"
+        android:title="@string/save_in_phone"
+        app:showAsAction="collapseActionView" />
+</menu>

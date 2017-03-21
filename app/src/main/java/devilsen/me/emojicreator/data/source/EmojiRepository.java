@@ -7,7 +7,7 @@ import java.util.List;
 
 import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.data.ImageBean;
-import devilsen.me.emojicreator.task.ApiService;
+import devilsen.me.emojicreator.net.ApiService;
 import rx.Observable;
 
 import static com.google.common.base.Preconditions.checkNotNull;

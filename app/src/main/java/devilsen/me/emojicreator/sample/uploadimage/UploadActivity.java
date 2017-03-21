@@ -1,18 +1,39 @@
 package devilsen.me.emojicreator.sample.uploadimage;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.wuba.image.photopicker.activity.BGAPhotoPickerActivity;
+
+import java.util.ArrayList;
 
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.sample.BaseActivity;
 import devilsen.me.emojicreator.util.ActivityUtils;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * author : dongSen
  * date : 2017/3/16 下午4:06
  * desc : 上传图片
  */
-public class UploadActivity extends BaseActivity {
+public class UploadActivity extends BaseActivity implements UploadImageContract.View {
+
+    private static final int REQUEST_CODE_IMAGE = 1;
+
+    private ImageView mImage;
+
+    private TextView mTitleTxt;
+
+    private UploadImageContract.Presenter mPresenter;
+    private String mImagePath;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,5 +42,66 @@ public class UploadActivity extends BaseActivity {
         ActivityUtils.initToolbar(this);
 
         getSupportActionBar().setTitle(R.string.share_your_emoji);
+
+        mImage = (ImageView) findViewById(R.id.img_upload);
+        mTitleTxt = (TextView) findViewById(R.id.edit_upload_name);
+
+        mImage.setOnClickListener(v -> changeImage());
+
+        mPresenter = new UploadPresenter(this);
+
+        changeImage();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_upload, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.menu_upload) {
+            uploadImage();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setPresenter(UploadImageContract.Presenter presenter) {
+        mPresenter = checkNotNull(presenter);
+    }
+
+    @Override
+    public void loadImage(String imagePath) {
+        this.mImagePath = imagePath;
+        mPresenter.loadImage(this, mImage, imagePath);
+    }
+
+    @Override
+    public void uploadImage() {
+        mPresenter.uploadImage(mImagePath, mTitleTxt.getText().toString());
+    }
+
+    @Override
+    public void changeImage() {
+        startActivityForResult(BGAPhotoPickerActivity.newIntent(this, null, false), REQUEST_CODE_IMAGE);
+    }
+
+    @Override
+    public void finishView() {
+        finish();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_IMAGE) {
+            ArrayList<String> selectedImages = BGAPhotoPickerActivity.getSelectedImages(data);
+            if (selectedImages != null && selectedImages.size() > 0) {
+                loadImage(selectedImages.get(0));
+            }
+        }
     }
 }

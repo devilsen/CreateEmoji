@@ -7,6 +7,8 @@ import devilsen.me.emojicreator.data.source.EmojiDataSource;
 import devilsen.me.emojicreator.data.source.EmojiRepository;
 import devilsen.me.emojicreator.data.source.local.EmojisLocalDataSource;
 import devilsen.me.emojicreator.data.source.remote.EmojisRemoteDataSource;
+import devilsen.me.emojicreator.data.source.uploadlist.UploadListData;
+import devilsen.me.emojicreator.data.source.uploadlist.UploadListDataSource;
 import devilsen.me.emojicreator.util.schedulers.BaseSchedulersProvider;
 import devilsen.me.emojicreator.util.schedulers.SchedulersProvider;
 
@@ -29,6 +31,10 @@ public class Injection {
         checkNotNull(context);
         return EmojiRepository.getInstance(EmojisLocalDataSource.getInstance(context),
                 EmojisRemoteDataSource.getInstance(provideSchedulersProvider()));
+    }
+
+    public static UploadListData provideUploadRepository(@NonNull Context context) {
+        return UploadListDataSource.getInstance(context, provideSchedulersProvider());
     }
 
     public static BaseSchedulersProvider provideSchedulersProvider() {

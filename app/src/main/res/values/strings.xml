@@ -25,4 +25,5 @@
     <string name="password">密码</string>
     <string name="upload">上传</string>
     <string name="share_your_emoji">分享你的表情</string>
+    <string name="upload_name_hint">不知所措</string>
 </resources>
