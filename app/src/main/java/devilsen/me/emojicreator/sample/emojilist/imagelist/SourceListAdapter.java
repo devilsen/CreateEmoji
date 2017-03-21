@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.File;
@@ -91,7 +93,11 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
 //        holder.sourceImg.setHierarchy(hierarchy);
 //        sourceImg.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
 
-        holder.sourceImg.setImageURI(uri);
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(uri)
+                .setAutoPlayAnimations(true)
+                .build();
+        holder.sourceImg.setController(controller);
 
     }
 
