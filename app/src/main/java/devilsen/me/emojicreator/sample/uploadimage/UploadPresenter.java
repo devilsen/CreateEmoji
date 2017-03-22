@@ -6,7 +6,10 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import devilsen.me.emojicreator.Injection;
 import devilsen.me.emojicreator.R;
+import devilsen.me.emojicreator.data.source.uploadlist.UploadImageBean;
+import devilsen.me.emojicreator.data.source.uploadlist.UploadListData;
 import devilsen.me.emojicreator.net.upload.UploadImageClient;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -20,8 +23,18 @@ public class UploadPresenter implements UploadImageContract.Presenter {
 
     private UploadImageContract.View mView;
 
-    public UploadPresenter(@NonNull UploadImageContract.View mView) {
+    private Context mContext;
+
+    private UploadListData mUploadListData;
+
+
+    public UploadPresenter(@NonNull Context context,
+                           @NonNull UploadImageContract.View mView) {
+        mContext = context;
+
         this.mView = checkNotNull(mView);
+
+        mUploadListData = Injection.provideUploadRepository(context);
     }
 
     @Override
@@ -36,8 +49,11 @@ public class UploadPresenter implements UploadImageContract.Presenter {
 
     @Override
     public void uploadImage(String imagePath, String name) {
-        UploadImageClient.getInstance().upload(name, imagePath);
+        UploadImageClient.getInstance().upload(mContext, name, imagePath);
         mView.finishView();
+
+        mUploadListData.uploadImage(new UploadImageBean(name, imagePath, true));
+
     }
 
     @Override

@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wuba.image.photopicker.activity.BGAPhotoPickerActivity;
 
@@ -33,6 +35,7 @@ public class UploadActivity extends BaseActivity implements UploadImageContract.
     private TextView mTitleTxt;
 
     private UploadImageContract.Presenter mPresenter;
+
     private String mImagePath;
 
     @Override
@@ -48,9 +51,10 @@ public class UploadActivity extends BaseActivity implements UploadImageContract.
 
         mImage.setOnClickListener(v -> changeImage());
 
-        mPresenter = new UploadPresenter(this);
+        mPresenter = new UploadPresenter(this, this);
 
         changeImage();
+
     }
 
     @Override
@@ -81,7 +85,20 @@ public class UploadActivity extends BaseActivity implements UploadImageContract.
 
     @Override
     public void uploadImage() {
-        mPresenter.uploadImage(mImagePath, mTitleTxt.getText().toString());
+        if (checkImageAndName())
+            mPresenter.uploadImage(mImagePath, mTitleTxt.getText().toString());
+    }
+
+    private boolean checkImageAndName() {
+        if (mImagePath == null || TextUtils.isEmpty(mImagePath)) {
+            Toast.makeText(this, getString(R.string.toast_no_select_image), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (TextUtils.isEmpty(mTitleTxt.getText().toString().trim())) {
+            Toast.makeText(this, getString(R.string.toast_no_input_name), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     @Override

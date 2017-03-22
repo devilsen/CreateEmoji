@@ -1,10 +1,10 @@
 package devilsen.me.emojicreator.net.gsonfactory;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.TypeAdapter;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -51,22 +51,16 @@ final class GsonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
         try {
             String body = value.string();
 
-            JSONObject jsonObject = new JSONObject(body);
+            JsonParser jsonParser = new JsonParser();
+            JsonObject jsonObject = jsonParser.parse(body).getAsJsonObject();
+            JsonElement status = jsonObject.get("status");
 
-            String status = jsonObject.optString("status");
-
-            if ("success".equals(status)) {
-                if (jsonObject.has("datas")) {
-                    Object data = jsonObject.get("datas");
-                    return adapter.fromJson(data.toString());
-                } else {
-                    return (T) status;
-                }
+            if ("success".equals(status.getAsString())) {
+                JsonElement datas = jsonObject.get("datas");
+                return adapter.fromJsonTree(datas);
             } else {
-                throw new RuntimeException(status);
+                throw new RuntimeException(status.getAsString());
             }
-        } catch (JSONException e) {
-            throw new RuntimeException(e.getMessage());
         } finally {
             value.close();
         }

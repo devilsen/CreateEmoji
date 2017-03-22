@@ -1,12 +1,18 @@
 package devilsen.me.emojicreator.net.upload;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.util.Log;
+import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import java.io.File;
 
 import devilsen.me.emojicreator.EmojiApplication;
+import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.net.ApiService;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -43,8 +49,8 @@ public class UploadImageClient {
      * @param name      图片名称
      * @param imagePath 图片路径
      */
-    public void upload(String name, @NonNull String imagePath) {
-        ApiService.getUrlApi().uploadImage(
+    public void upload(Context context, String name, @NonNull String imagePath) {
+        ApiService.getUploadApi().uploadImage(
                 RequestBody.create(MEDIA_TYPE_TXT, name)
                 , RequestBody.create(MEDIA_TYPE_PNG, new File(imagePath)))
                 .subscribeOn(Schedulers.io())
@@ -52,18 +58,37 @@ public class UploadImageClient {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        Toast.makeText(EmojiApplication.getInstance().getApplicationContext(), "分享成功", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("error", e.toString());
+                        showNotification(context);
                     }
 
                     @Override
                     public void onNext(String s) {
+                        Toast.makeText(EmojiApplication.getInstance().getApplicationContext(), "分享成功", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+    }
+
+    private void showNotification(Context context) {
+
+        Intent intent = new Intent();
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Notification notification = new NotificationCompat.Builder(context)
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setAutoCancel(true)
+                .setContentTitle(context.getString(R.string.upload_image_file_title))
+                .setContentText(context.getString(R.string.upload_image_file_content))
+                .setContentIntent(pendingIntent)
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(10, notification);
 
     }
 

@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:minHeight="300dp" />
+        android:background="?android:attr/selectableItemBackground"
+        android:minHeight="300dp"
+        android:src="@mipmap/ic_no_selct_image" />
 
     <EditText
         android:id="@+id/edit_upload_name"

@@ -26,4 +26,8 @@
     <string name="upload">上传</string>
     <string name="share_your_emoji">分享你的表情</string>
     <string name="upload_name_hint">不知所措</string>
+    <string name="toast_no_select_image">你真的选了张假图片</string>
+    <string name="toast_no_input_name">你给了个假名字？</string>
+    <string name="upload_image_file_title">上传失败了</string>
+    <string name="upload_image_file_content">点击重试吧</string>
 </resources>

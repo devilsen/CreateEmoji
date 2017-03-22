@@ -1,7 +1,6 @@
 package devilsen.me.emojicreator.sample.emojilist.imagelist;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.util.List;
@@ -61,7 +60,7 @@ public class ListPresenter implements ListContract.Presenter {
 
                                @Override
                                public void onError(Throwable e) {
-                                   Toast.makeText(EmojiApplication.getInstance().getApplicationContext(), "好像没网了", Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(EmojiApplication.getInstance().getApplicationContext(), "网络好像出问题了", Toast.LENGTH_SHORT).show();
 
                                    e.printStackTrace();
 

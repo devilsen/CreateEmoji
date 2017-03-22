@@ -1,4 +1,4 @@
-package devilsen.me.emojicreator.sample.emojilist.imagelist;
+package devilsen.me.emojicreator.sample.uploadimage;
 
 import android.net.Uri;
 import android.support.v4.app.Fragment;
@@ -16,10 +16,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.R;
-import devilsen.me.emojicreator.data.ImageBean;
-import devilsen.me.emojicreator.net.ApiService;
+import devilsen.me.emojicreator.data.source.uploadlist.UploadImageBean;
 import devilsen.me.emojicreator.util.ImageSizeUtil;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -30,25 +28,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * author : dongsen
  * Time : 2016-02-26
  */
-public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.ViewHolder> {
+public class UploadListAdapter extends RecyclerView.Adapter<UploadListAdapter.ViewHolder> {
 
-    private List<ImageBean> listData;
-    private List<ImageBean> newList;
+    private List<UploadImageBean> listData;
 
     private ItemClickListener itemClickListener;
-//    private final GenericDraweeHierarchy hierarchy;
 
-    public SourceListAdapter(Fragment context) {
+    public UploadListAdapter(Fragment context) {
         this.listData = new ArrayList<>();
-        this.newList = new ArrayList<>();
-
-//        GenericDraweeHierarchyBuilder builder = new GenericDraweeHierarchyBuilder(context.getResources());
-//        hierarchy = builder
-//                .setFadeDuration(300)
-//                .setPlaceholderImage(R.mipmap.ic_image_holder)
-//                .setFailureImage(R.mipmap.emoji_creator_icon_2)
-//                .setProgressBarImage(new ProgressBarDrawable())
-//                .build();
     }
 
     @Override
@@ -60,39 +47,19 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        ImageBean bean = listData.get(position);
+        UploadImageBean bean = listData.get(position);
         if (bean == null)
             return;
 
         Uri uri;
 
-        if (bean.path.startsWith("https:")) {
-            uri = Uri.parse(bean.path + Constant.SUFFIX);
-        } else if (bean.path.startsWith("/api")) {
-            uri = Uri.parse(ApiService.HOST + bean.path + Constant.SUFFIX);
-        } else {
-            ImageSizeUtil.ImageSize imageSize = ImageSizeUtil.getInstance().decodeImageSize(bean.path);
-            bean.size = new ImageBean.SizeBean(imageSize.width, imageSize.height);
-            uri = Uri.fromFile(new File(bean.path));
-        }
+        ImageSizeUtil.ImageSize imageSize = ImageSizeUtil.getInstance().decodeImageSize(bean.path);
+        uri = Uri.fromFile(new File(bean.path));
 
         holder.nameTxt.setText(bean.name);
 
-//        Glide.with(mContext)
-//                .load(path)
-//                .placeholder(R.mipmap.ic_image_holder)
-//                .error(R.mipmap.emoji_creator_icon_2)
-//                .thumbnail(0.5f)
-//                .skipMemoryCache(true)
-//                .fitCenter()
-//                .crossFade()
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(holder.sourceImg);
-
-        float ratio = (float) bean.size.width / (float) bean.size.height;
+        float ratio = (float) imageSize.width / (float) imageSize.height;
         holder.sourceImg.setAspectRatio(ratio);
-//        holder.sourceImg.setHierarchy(hierarchy);
-//        sourceImg.getHierarchy().setActualImageScaleType(ScalingUtils.ScaleType.FIT_XY);
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
                 .setUri(uri)
@@ -111,20 +78,14 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
         itemClickListener = clickListener;
     }
 
-    public void replaceData(List<ImageBean> listData) {
+    public void replaceData(List<UploadImageBean> listData) {
         this.listData = checkNotNull(listData);
         notifyDataSetChanged();
     }
 
-    public void addData(List<ImageBean> listData) {
-//        newList.addAll(listData);
-
-//        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new ImageDiffCallback(this.listData, newList), true);
-
+    public void addData(List<UploadImageBean> listData) {
         this.listData.addAll(listData);
         notifyDataSetChanged();
-//        diffResult.dispatchUpdatesTo(this);
-//        notifyDataSetChanged();
     }
 
     /**
@@ -173,9 +134,9 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
     }
 
     public interface ItemClickListener {
-        void onItemClick(ImageBean bean, View imageView);
+        void onItemClick(UploadImageBean bean, View imageView);
 
-        void onItemLongClick(ImageBean bean, int position);
+        void onItemLongClick(UploadImageBean bean, int position);
     }
 
 

@@ -15,6 +15,7 @@ import devilsen.me.emojicreator.Constant;
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.sample.BaseActivity;
 import devilsen.me.emojicreator.sample.emojilist.imagelist.ImageListFragment;
+import devilsen.me.emojicreator.sample.emojilist.uploadlist.UploadListFragment;
 import devilsen.me.emojicreator.sample.other.AboutActivity;
 import devilsen.me.emojicreator.sample.other.FeedbackActivity;
 import devilsen.me.emojicreator.sample.search.SearchEmojiActivity;
@@ -22,7 +23,7 @@ import devilsen.me.emojicreator.sample.uploadimage.UploadActivity;
 
 public class MainActivity extends BaseActivity {
 
-    private static String[] titles = new String[]{"手气不错", "新品发售", "热门搞笑", "个人制造"};
+    private static String[] titles = new String[]{"手气不错", "新品发售", "热门搞笑", "个人制造","上传列表"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,8 @@ public class MainActivity extends BaseActivity {
                 return ImageListFragment.newInstance(Constant.TYPE_HOT);
             } else if (position == 3) {
                 return ImageListFragment.newInstance(Constant.TYPE_LOCAL);
+            } else if (position == 4) {
+                return UploadListFragment.newInstance();
             } else {
                 return ImageListFragment.newInstance(Constant.TYPE_LOCAL);
             }
