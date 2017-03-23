@@ -14,10 +14,13 @@ import java.io.File;
 import devilsen.me.emojicreator.EmojiApplication;
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.net.ApiService;
+import devilsen.me.emojicreator.util.ImageUtil;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -49,24 +52,38 @@ public class UploadImageClient {
      * @param name      图片名称
      * @param imagePath 图片路径
      */
-    public void upload(Context context, String name, @NonNull String imagePath) {
-        ApiService.getUploadApi().uploadImage(
-                RequestBody.create(MEDIA_TYPE_TXT, name)
-                , RequestBody.create(MEDIA_TYPE_PNG, new File(imagePath)))
+    public void upload(String name, @NonNull String imagePath) {
+        Observable.just("")
                 .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .map(new Func1<String, File>() {
+                    @Override
+                    public File call(String path) {
+                        return ImageUtil.compressionImage(imagePath);
+                    }
+                })
+                .observeOn(Schedulers.io())
+                .flatMap(new Func1<File, Observable<String>>() {
+                    @Override
+                    public Observable<String> call(File file) {
+                        return ApiService.getUploadApi().uploadImage(RequestBody.create(MEDIA_TYPE_TXT, name)
+                                , RequestBody.create(MEDIA_TYPE_PNG, file));
+                    }
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        showNotification(context);
+                        showNotification(EmojiApplication.getInstance().getApplicationContext());
                     }
 
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(String observable) {
                         Toast.makeText(EmojiApplication.getInstance().getApplicationContext(), "分享成功", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -92,26 +109,5 @@ public class UploadImageClient {
 
     }
 
-//    private void compressionImage() {
-//        Bitmap bitmap = ImageUtils.getBitmap(path, 200, 200);
-//
-//        String thumbPath = Content.thumbPath + System.currentTimeMillis() + ".png";
-//        File file = new File(thumbPath);
-//        try {
-//            if (!file.getParentFile().exists()) {
-//                file.getParentFile().mkdirs();
-//            }
-//            if (!file.exists()) {
-//                file.createNewFile();
-//            }
-//
-//            FileOutputStream out = new FileOutputStream(file);
-//            if (bitmap.compress(Bitmap.CompressFormat.PNG, 80, out)) {
-//                out.flush();
-//                out.close();
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
 }

@@ -49,7 +49,7 @@ public class UploadPresenter implements UploadImageContract.Presenter {
 
     @Override
     public void uploadImage(String imagePath, String name) {
-        UploadImageClient.getInstance().upload(mContext, name, imagePath);
+        UploadImageClient.getInstance().upload(name, imagePath);
         mView.finishView();
 
         mUploadListData.uploadImage(new UploadImageBean(name, imagePath, true));

@@ -30,7 +30,11 @@ public class EmojiUtil {
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("MMddHHmmss", Locale.getDefault());
 
-    public static final String fileDir = "createEmoji";
+    private static final String emojiDir = Environment.getExternalStorageDirectory().getPath();
+
+    private static final String fileDir = "createEmoji";
+
+    private static final String cacheDir = "uploadCache";
 
     private static EmojiUtil instance;
 
@@ -99,20 +103,33 @@ public class EmojiUtil {
         file = null;
     }
 
+//    /**
+//     * 获取保存路径
+//     * @return SD卡或者手机储存
+//     */
+//    private String getDirPath(){
+//        String saveDir;
+//        boolean sdCardExit = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+//        if (sdCardExit) {
+//            saveDir = Environment.getExternalStorageDirectory().getPath();
+//        } else {
+//            saveDir = Environment.getDataDirectory().getPath();
+//        }
+//        return saveDir;
+//    }
     /**
-     * 获取保存路径
+     * 获取保存图片路径
      *
-     * @return sd卡 or 手机
      */
     private String getSavePath() {
-        String saveDir;
-        boolean sdCardExit = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
-        if (sdCardExit) {
-            saveDir = Environment.getExternalStorageDirectory().getPath();
-        } else {
-            saveDir = Environment.getDataDirectory().getPath();
-        }
-        return saveDir + "/" + fileDir + "/";
+        return emojiDir + "/" + fileDir + "/";
+    }
+
+    /**
+     * 获取上传时图片缓存路径
+     */
+    public String getCacheDir(){
+        return emojiDir + "/" + cacheDir + "/";
     }
 
     /**

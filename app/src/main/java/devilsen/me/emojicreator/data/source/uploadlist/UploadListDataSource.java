@@ -56,7 +56,7 @@ public class UploadListDataSource implements UploadListData {
                 UploadEntry.COLUMN_NAME_IMAGE_PATH,
                 UploadEntry.COLUMN_NAME_UPLOAD_STATUS
         };
-        String sql = String.format("SELECT %s FROM %s", TextUtils.join(",", projection), UploadEntry.TABLE_NAME);
+        String sql = String.format("SELECT %s FROM %s DESC", TextUtils.join(",", projection), UploadEntry.TABLE_NAME);
         return mBriteDatabase.createQuery(UploadEntry.TABLE_NAME, sql)
                 .mapToList(this::getUploadImage);
     }
