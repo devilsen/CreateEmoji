@@ -2,7 +2,6 @@ package devilsen.me.emojicreator.sample.emojilist.uploadlist;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -54,7 +53,7 @@ public class UploadListFragment extends BaseFragment implements UploadListContra
         mEmojiRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.list_source_sr);
         RecyclerView emojiRecyclerView = (RecyclerView) view.findViewById(R.id.list_source_rv);
         mEmptyLayout = (LinearLayout) view.findViewById(R.id.layout_empty);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.goodluck_fab);
+//        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.goodluck_fab);
 
         mAdapter = new UploadListAdapter(this);
         emojiRecyclerView.setAdapter(mAdapter);
@@ -64,7 +63,7 @@ public class UploadListFragment extends BaseFragment implements UploadListContra
         mEmojiRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         mEmojiRefreshLayout.setOnRefreshListener(this::loadImages);
-        fab.setOnClickListener(v -> loadImages());
+//        fab.setOnClickListener(v -> loadImages());
         mAdapter.setItemClickListener(this);
 
         mPresenter = new UploadListPresenter(

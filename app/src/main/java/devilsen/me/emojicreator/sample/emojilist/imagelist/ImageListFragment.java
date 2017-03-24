@@ -1,6 +1,7 @@
 package devilsen.me.emojicreator.sample.emojilist.imagelist;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -76,7 +77,6 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
         mEmojiRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.list_source_sr);
         RecyclerView emojiRecyclerView = (RecyclerView) view.findViewById(R.id.list_source_rv);
         mEmptyLayout = (LinearLayout) view.findViewById(R.id.layout_empty);
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.goodluck_fab);
 
         mAdapter = new SourceListAdapter(this);
         emojiRecyclerView.setAdapter(mAdapter);
@@ -86,7 +86,6 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
         mEmojiRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
         mEmojiRefreshLayout.setOnRefreshListener(() -> loadImage(true));
-        fab.setOnClickListener(v -> loadImage(true));
         mAdapter.setItemClickListener(this);
 
         mPresenter = new ListPresenter(Injection.provideEmojiRepository(getContext()),
@@ -106,10 +105,12 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
             loadImage(true);
             canLoadMore = false;
             firstVisible = false;
+
+            FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab_fresh);
+            fab.setOnClickListener(v -> loadImage(true));
         } else if (type == Constant.TYPE_LOCAL) {
             canLoadMore = false;
         } else {
-            fab.setVisibility(View.GONE);
             canLoadMore = true;
         }
     }
@@ -228,7 +229,7 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
     }
 
     @Override
-    public void onItemClick(ImageBean bean, View imageView) {
+    public void onItemClick(@NonNull ImageBean bean, View imageView) {
         if (type != Constant.TYPE_LOCAL) {
             IntentUtil.startImg(mActivity, bean, imageView);
         } else {
@@ -237,7 +238,7 @@ public class ImageListFragment extends BaseFragment implements ListContract.View
     }
 
     @Override
-    public void onItemLongClick(ImageBean bean, int position) {
+    public void onItemLongClick(@NonNull ImageBean bean, int position) {
         showLongClickDialog(bean, position);
     }
 }

@@ -31,7 +31,7 @@ public class ImageUtil {
             short angle = 0;
 
             ExifInterface exif = null;
-            if (filePath.endsWith("jpeg")) {
+            if (filePath.endsWith("jpeg") || filePath.endsWith("jpg")) {
                 try {
                     exif = new ExifInterface(filePath);
                 } catch (IOException var8) {

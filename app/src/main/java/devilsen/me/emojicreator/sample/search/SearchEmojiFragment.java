@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 import devilsen.me.emojicreator.R;
@@ -50,7 +48,7 @@ public class SearchEmojiFragment extends BaseFragment implements SearchEmojiCont
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_search, container,false);
+        View root = inflater.inflate(R.layout.fragment_good_luck, container,false);
         mSwipeRefresh = (SwipeRefreshLayout) root.findViewById(R.id.search_refresh_layout);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.search_recycler);
         mEmptyView = root.findViewById(R.id.search_empty_layout);
@@ -71,12 +69,12 @@ public class SearchEmojiFragment extends BaseFragment implements SearchEmojiCont
 
         mAdapter.setItemClickListener(new SourceListAdapter.ItemClickListener() {
             @Override
-            public void onItemClick(ImageBean bean, View imageView) {
+            public void onItemClick(@NonNull ImageBean bean, View imageView) {
                 IntentUtil.startImg(mActivity, bean, imageView);
             }
 
             @Override
-            public void onItemLongClick(ImageBean bean, int position) {
+            public void onItemLongClick(@NonNull ImageBean bean, int position) {
             }
         });
 
@@ -84,20 +82,10 @@ public class SearchEmojiFragment extends BaseFragment implements SearchEmojiCont
          * 在快速滑动时，不加载图片
          */
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                if (Math.abs(dy) > 30) {
-                    Glide.with(getContext().getApplicationContext()).pauseRequests();
-                } else {
-                    Glide.with(getContext().getApplicationContext()).resumeRequests();
-                }
-            }
 
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getContext().getApplicationContext()).resumeRequests();
                     onScroll();
                 }
             }

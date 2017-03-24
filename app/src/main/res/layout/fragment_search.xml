@@ -22,6 +22,6 @@
     <include
         android:id="@+id/search_empty_layout"
         layout="@layout/view_empty"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </FrameLayout>

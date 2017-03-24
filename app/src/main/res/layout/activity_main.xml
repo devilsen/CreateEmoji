@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="true" >
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/id_toolbar_container"
@@ -24,13 +22,13 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="50dp"
             android:background="@color/colorPrimary"
             app:tabGravity="center"
             app:tabIndicatorColor="@color/white"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/white"
-            app:tabTextColor="@color/white" />
+            app:tabTextColor="@color/title_gray" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -41,6 +39,17 @@
         android:layout_below="@+id/tabLayout"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_fresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:src="@mipmap/ic_refresh_white_24dp"
+        app:fabSize="normal"
+        app:layout_anchor="@id/viewPager_content"
+        app:layout_anchorGravity="bottom|right|end" />
+
 </android.support.design.widget.CoordinatorLayout>
+
 
 

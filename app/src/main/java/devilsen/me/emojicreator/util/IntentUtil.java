@@ -2,6 +2,7 @@ package devilsen.me.emojicreator.util;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
@@ -19,9 +20,9 @@ public class IntentUtil {
 
     public static final String ELEMENT_NAME = "img";
 
-    public static void startImg(Activity activity, ImageBean imageBean, View imageView) {
+    public static void startImg(Activity activity, @NonNull ImageBean imageBean, View imageView) {
         Intent intent = new Intent(activity, CreateActivity.class);
-        intent.putExtra("name", imageBean.name);
+        intent.putExtra("name", imageBean.name == null ? "哈哈" : imageBean.name);
         intent.putExtra("path", imageBean.path);
         intent.putExtra("width", imageBean.size.width);
         intent.putExtra("height", imageBean.size.height);

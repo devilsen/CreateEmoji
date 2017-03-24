@@ -2,6 +2,7 @@ package devilsen.me.emojicreator.sample.emojilist;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -23,7 +24,7 @@ import devilsen.me.emojicreator.sample.uploadimage.UploadActivity;
 
 public class MainActivity extends BaseActivity {
 
-    private static String[] titles = new String[]{"手气不错", "新品发售", "热门搞笑", "个人制造","上传列表"};
+    private static String[] titles = new String[]{"手气不错", "新品发售", "热门搞笑", "个人制造", "上传列表"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,33 @@ public class MainActivity extends BaseActivity {
 
         TabLayout mTableLayout = (TabLayout) findViewById(R.id.tabLayout);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPager_content);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.fab_fresh);
 
         mViewPager.setOffscreenPageLimit(4);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
 
         mTableLayout.setupWithViewPager(mViewPager);
+
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0 && !floatingActionButton.isShown()) {
+                    floatingActionButton.show();
+                } else if (floatingActionButton.isShown()) {
+                    floatingActionButton.hide();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
