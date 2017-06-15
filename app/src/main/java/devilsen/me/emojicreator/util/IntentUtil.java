@@ -3,8 +3,6 @@ package devilsen.me.emojicreator.util;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.view.View;
 
 import devilsen.me.emojicreator.data.ImageBean;
@@ -27,12 +25,15 @@ public class IntentUtil {
         intent.putExtra("width", imageBean.size.width);
         intent.putExtra("height", imageBean.size.height);
 
-        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imageView, ELEMENT_NAME);
-        try {
-            ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle());
-        } catch (IllegalArgumentException e) {
-            activity.startActivity(intent);
-        }
+//        ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(activity, imageView, ELEMENT_NAME);
+//        try {
+//            ActivityCompat.startActivity(activity, intent, optionsCompat.toBundle());
+//        } catch (IllegalArgumentException e) {
+//            activity.startActivity(intent);
+//        }
+
+        activity.startActivity(intent);
+
     }
 
 

@@ -7,10 +7,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,15 +26,20 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.facebook.common.executors.CallerThreadExecutor;
+import com.facebook.common.references.CloseableReference;
+import com.facebook.datasource.DataSource;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
+import com.facebook.imagepipeline.image.CloseableImage;
+import com.facebook.imagepipeline.request.ImageRequest;
+import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
 import devilsen.me.emojicreator.R;
 import devilsen.me.emojicreator.sample.BaseActivity;
 import devilsen.me.emojicreator.util.ActivityUtils;
 import devilsen.me.emojicreator.util.EmojiUtil;
-import devilsen.me.emojicreator.util.IntentUtil;
 import devilsen.me.emojicreator.util.ShareUti;
 import devilsen.me.emojicreator.util.TintUtil;
 import devilsen.me.emojicreator.util.analyze.Umeng;
@@ -118,7 +124,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         initPaint();
         initTxtPosition();
 
-        ViewCompat.setTransitionName(sourceImg, IntentUtil.ELEMENT_NAME);
+//        ViewCompat.setTransitionName(sourceImg, IntentUtil.ELEMENT_NAME);
 
         TintUtil.setDrawableTint(this, fontSizeCb, R.mipmap.ic_format_shapes_black_24dp);
         TintUtil.setDrawableTint(this, selectColorCb, R.mipmap.ic_color_lens_black_24dp);
@@ -152,26 +158,61 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         jokeEdit.setBoundary(imgWidth, imgHeight);
 
         if (path != null) {
-            Glide.with(this)
-                    .load(path)
-                    .asBitmap()
-                    .dontAnimate()
-                    .error(R.mipmap.emoji_creator_icon_2)
-                    .fitCenter()
-                    .into(new SimpleTarget<Bitmap>(imgWidth, imgHeight) {
-                        @Override
-                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                            sourceImg.setImageBitmap(resource);
-                            sourceBitmap = resource;
-                            initCanvas();
-                            loadingLayout.setVisibility(View.GONE);
-                            jokeEdit.setVisibility(View.VISIBLE);
-                            fontSizeCb.setEnabled(true);
-                            selectColorCb.setEnabled(true);
-                            doneBtn.setEnabled(true);
-                            saveBtn.setEnabled(true);
-                        }
-                    });
+            // To get image using Fresco
+            ImageRequest imageRequest = ImageRequestBuilder
+                    .newBuilderWithSource(Uri.parse(path))
+                    .setProgressiveRenderingEnabled(true)
+                    .build();
+
+            ImagePipeline imagePipeline = Fresco.getImagePipeline();
+            DataSource<CloseableReference<CloseableImage>> dataSource =
+                    imagePipeline.fetchDecodedImage(imageRequest, this);
+
+            dataSource.subscribe(new BaseBitmapDataSubscriber() {
+
+                @Override
+                public void onNewResultImpl(@Nullable Bitmap bitmap) {
+                    // You can use the bitmap in only limited ways
+                    // No need to do any cleanup.
+                    sourceImg.setImageBitmap(bitmap);
+                    sourceBitmap = bitmap;
+                    initCanvas();
+                    loadingLayout.setVisibility(View.GONE);
+                    jokeEdit.setVisibility(View.VISIBLE);
+                    fontSizeCb.setEnabled(true);
+                    selectColorCb.setEnabled(true);
+                    doneBtn.setEnabled(true);
+                    saveBtn.setEnabled(true);
+                }
+
+                @Override
+                public void onFailureImpl(DataSource dataSource) {
+                    // No cleanup required here.
+                }
+
+            }, CallerThreadExecutor.getInstance());
+
+
+//            Glide.with(this)
+//                    .load(path)
+//                    .asBitmap()
+//                    .dontAnimate()
+//                    .error(R.mipmap.emoji_creator_icon_2)
+//                    .fitCenter()
+//                    .into(new SimpleTarget<Bitmap>(imgWidth, imgHeight) {
+//                        @Override
+//                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+//                            sourceImg.setImageBitmap(resource);
+//                            sourceBitmap = resource;
+//                            initCanvas();
+//                            loadingLayout.setVisibility(View.GONE);
+//                            jokeEdit.setVisibility(View.VISIBLE);
+//                            fontSizeCb.setEnabled(true);
+//                            selectColorCb.setEnabled(true);
+//                            doneBtn.setEnabled(true);
+//                            saveBtn.setEnabled(true);
+//                        }
+//                    });
         } else {
             Toast.makeText(this, "载入图片错误", Toast.LENGTH_SHORT).show();
         }

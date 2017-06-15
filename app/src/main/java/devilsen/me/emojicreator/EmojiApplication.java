@@ -8,9 +8,9 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
+import devilsen.me.emojicreator.net.OkHttpInstance;
 import devilsen.me.emojicreator.net.imagepipeline.OkHttpImagePipelineConfigFactory;
 import devilsen.me.emojicreator.util.Log4Utils;
-import okhttp3.OkHttpClient;
 
 /**
  * author : dongSen
@@ -30,11 +30,12 @@ public class EmojiApplication extends Application {
             return;
         }
         LeakCanary.install(this);
-        Log4Utils.closeAll();
+        Log4Utils.openAll();
 
         ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
-                .newBuilder(this, new OkHttpClient.Builder().build())
+                .newBuilder(this, OkHttpInstance.getInstance().build())
                 .build();
+
         Fresco.initialize(this, config);
 
         //使用集成测试服务
