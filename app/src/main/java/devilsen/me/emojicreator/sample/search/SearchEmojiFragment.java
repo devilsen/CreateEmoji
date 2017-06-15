@@ -48,7 +48,7 @@ public class SearchEmojiFragment extends BaseFragment implements SearchEmojiCont
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_good_luck, container,false);
+        View root = inflater.inflate(R.layout.fragment_search, container, false);
         mSwipeRefresh = (SwipeRefreshLayout) root.findViewById(R.id.search_refresh_layout);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.search_recycler);
         mEmptyView = root.findViewById(R.id.search_empty_layout);
@@ -56,8 +56,8 @@ public class SearchEmojiFragment extends BaseFragment implements SearchEmojiCont
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         mAdapter = new SourceListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
         mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);

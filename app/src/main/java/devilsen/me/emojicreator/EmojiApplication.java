@@ -9,6 +9,7 @@ import com.squareup.leakcanary.LeakCanary;
 import com.umeng.analytics.MobclickAgent;
 
 import devilsen.me.emojicreator.net.imagepipeline.OkHttpImagePipelineConfigFactory;
+import devilsen.me.emojicreator.util.Log4Utils;
 import okhttp3.OkHttpClient;
 
 /**
@@ -29,6 +30,7 @@ public class EmojiApplication extends Application {
             return;
         }
         LeakCanary.install(this);
+        Log4Utils.closeAll();
 
         ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
                 .newBuilder(this, new OkHttpClient.Builder().build())

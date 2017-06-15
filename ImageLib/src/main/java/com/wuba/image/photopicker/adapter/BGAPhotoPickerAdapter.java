@@ -38,7 +38,6 @@ public class BGAPhotoPickerAdapter extends BGARecyclerViewAdapter<String> {
         mActivity = activity;
     }
 
-    @Override
     public void setItemChildListener(BGAViewHolderHelper helper) {
         helper.setItemChildClickListener(R.id.iv_item_photo_picker_flag);
         helper.setItemChildClickListener(R.id.iv_item_photo_picker_photo);
