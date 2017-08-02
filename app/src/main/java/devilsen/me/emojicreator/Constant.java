@@ -9,7 +9,7 @@ public class Constant {
 
     public static final int OFF_SET = 20;
 
-//    public static final String SUFFIX = "?w=200&h=400";
+    //    public static final String SUFFIX = "?w=200&h=400";
     public static final String SUFFIX = "";
 
     /**

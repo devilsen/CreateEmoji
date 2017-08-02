@@ -26,5 +26,10 @@ public class BaseFragment extends Fragment {
         mActivity = activity;
     }
 
-
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContext = null;
+        mActivity = null;
+    }
 }

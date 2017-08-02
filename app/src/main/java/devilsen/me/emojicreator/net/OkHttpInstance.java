@@ -22,7 +22,7 @@ public class OkHttpInstance {
         if (httpClient == null) {
             httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(new LoggingInterceptor());
-            getUnsafeOkHttpClient(httpClient);
+//            getUnsafeOkHttpClient(httpClient);
         }
         return httpClient;
     }

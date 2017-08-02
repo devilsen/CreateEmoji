@@ -10,6 +10,8 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatSeekBar;
@@ -177,12 +179,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                     sourceImg.setImageBitmap(bitmap);
                     sourceBitmap = bitmap;
                     initCanvas();
-                    loadingLayout.setVisibility(View.GONE);
-                    jokeEdit.setVisibility(View.VISIBLE);
-                    fontSizeCb.setEnabled(true);
-                    selectColorCb.setEnabled(true);
-                    doneBtn.setEnabled(true);
-                    saveBtn.setEnabled(true);
+                    handler.sendEmptyMessage(1);
                 }
 
                 @Override
@@ -217,6 +214,24 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
             Toast.makeText(this, "载入图片错误", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private void activationViews(){
+
+        loadingLayout.setVisibility(View.GONE);
+        jokeEdit.setVisibility(View.VISIBLE);
+        fontSizeCb.setEnabled(true);
+        selectColorCb.setEnabled(true);
+        doneBtn.setEnabled(true);
+        saveBtn.setEnabled(true);
+    }
+
+    Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            activationViews();
+            return true;
+        }
+    });
 
     private void initListener() {
         doneBtn.setOnClickListener(this);

@@ -37,7 +37,7 @@ ext{
     guavaVersion = '18.0'
     retrofitVersion = '2.2.0'
     okhttpVersion = '3.6.0'
-    frescoVersion = '1.3.0'
+    frescoVersion = '1.1.0'
     sqlbriteVersion = '1.1.1'
     progressVersion = '1.7'
     glideVersion = '3.7.0'
