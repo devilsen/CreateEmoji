@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.wuba.image.photopicker.PhotoPickerApi;
 import com.wuba.image.photopicker.activity.BGAPhotoPickerActivity;
 
 import java.util.ArrayList;
@@ -103,7 +104,7 @@ public class UploadActivity extends BaseActivity implements UploadImageContract.
 
     @Override
     public void changeImage() {
-        startActivityForResult(BGAPhotoPickerActivity.newIntent(this, null, false), REQUEST_CODE_IMAGE);
+        startActivityForResult(PhotoPickerApi.pickerIntent(this), REQUEST_CODE_IMAGE);
     }
 
     @Override

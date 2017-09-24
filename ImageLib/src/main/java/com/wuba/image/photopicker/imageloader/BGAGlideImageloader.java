@@ -1,14 +1,15 @@
 package com.wuba.image.photopicker.imageloader;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.load.resource.gif.GifDrawableTransformation;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.animation.GlideAnimation;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -19,10 +20,10 @@ import com.bumptech.glide.request.target.Target;
  * 创建时间:16/6/25 下午4:40
  * 描述:
  */
-public class BGAGlideImageloader extends BGAImageLoader {
+class BGAGlideImageLoader extends BGAImageLoader {
 
     @Override
-    public void displayImage(Activity activity, final ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, final DisplayDelegate delegate) {
+    public void displayImage(Context context, final ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, final DisplayDelegate delegate) {
         final String finalPath = getPath(path);
 //        Glide.with(activity)
 //                .load(finalPath)
@@ -33,18 +34,16 @@ public class BGAGlideImageloader extends BGAImageLoader {
 //                .into(imageView);
 
 
-        Glide.with(activity)
+        Glide.with(context)
                 .load(finalPath)
                 .thumbnail(0.3f)
                 .placeholder(loadingResId)
                 .error(failResId)
+                .dontAnimate()
                 .override(width, height)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
-                        if (delegate != null) {
-                            delegate.onFail();
-                        }
                         return false;
                     }
 
@@ -60,32 +59,63 @@ public class BGAGlideImageloader extends BGAImageLoader {
     }
 
     @Override
-    public void downloadImage(Context context, String path, final DownloadDelegate delegate) {
+    public void downloadImage(Context context, @NonNull String path, final DownloadDelegate delegate) {
         final String finalPath = getPath(path);
-        Glide.with(context.getApplicationContext()).load(finalPath).asBitmap().into(new SimpleTarget<Bitmap>() {
-            @Override
-            public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                if (delegate != null) {
-                    delegate.onSuccess(finalPath, resource);
-                }
-            }
+        if (!path.endsWith(".gif")) {
+            Glide.with(context.getApplicationContext())
+                    .load(finalPath)
+                    .asBitmap()
+                    .toBytes()
+                    .into(new SimpleTarget<byte[]>() {
+                        @Override
+                        public void onResourceReady(byte[] resource, GlideAnimation<? super byte[]> glideAnimation) {
+                            if (delegate != null) {
+                                delegate.onSuccess(finalPath, resource);
+                            }
+                        }
 
-            @Override
-            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                if (delegate != null) {
-                    delegate.onFailed(finalPath);
-                }
-            }
-        });
+                        @Override
+                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                            super.onLoadFailed(e, errorDrawable);
+                            if (delegate != null) {
+                                delegate.onFailed(finalPath);
+                            }
+                        }
+                    });
+        } else {
+            Glide.with(context.getApplicationContext())
+                    .load(path)
+                    .asGif()
+                    .toBytes()
+                    .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL) // resize to this size
+                    // transformation to use for resize
+                    .transform(new GifDrawableTransformation(new FitCenter(context), Glide.get(context).getBitmapPool()))
+                    .into(new SimpleTarget<byte[]>() {
+                        @Override
+                        public void onResourceReady(byte[] resource, GlideAnimation<? super byte[]> glideAnimation) {
+                            if (delegate != null) {
+                                delegate.onSuccess(finalPath, resource);
+                            }
+                        }
+
+                        @Override
+                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+                            super.onLoadFailed(e, errorDrawable);
+                            if (delegate != null) {
+                                delegate.onFailed(finalPath);
+                            }
+                        }
+                    });
+        }
     }
 
     @Override
-    public void pause(Activity activity) {
-        Glide.with(activity.getApplicationContext()).pauseRequests();
+    public void pause(Context context) {
+        Glide.with(context.getApplicationContext()).pauseRequests();
     }
 
     @Override
-    public void resume(Activity activity) {
-        Glide.with(activity.getApplicationContext()).resumeRequestsRecursive();
+    public void resume(Context context) {
+        Glide.with(context.getApplicationContext()).resumeRequestsRecursive();
     }
 }

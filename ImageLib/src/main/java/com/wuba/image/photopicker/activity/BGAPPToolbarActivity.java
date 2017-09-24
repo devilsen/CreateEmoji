@@ -69,6 +69,7 @@ public abstract class BGAPPToolbarActivity extends AppCompatActivity implements 
         mToolbar = getViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ViewStubCompat viewStub = getViewById(R.id.viewStub);
         viewStub.setLayoutResource(layoutResID);
         viewStub.inflate();

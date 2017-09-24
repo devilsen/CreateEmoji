@@ -1,9 +1,11 @@
 package com.wuba.image.photopicker.activity;
 
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,9 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.wuba.image.R;
+import com.wuba.image.photopicker.PhotoPickerApi;
 import com.wuba.image.photopicker.adapter.BGAPhotoPickerAdapter;
 import com.wuba.image.photopicker.crop.Crop;
-import com.wuba.image.photopicker.imageloader.BGARVOnScrollListener;
+import com.wuba.image.photopicker.imageloader.BGAImage;
 import com.wuba.image.photopicker.model.BGAImageFolderModel;
 import com.wuba.image.photopicker.pw.BGAPhotoFolderPw;
 import com.wuba.image.photopicker.util.BGAAsyncTask;
@@ -31,8 +34,17 @@ import com.wuba.image.photopicker.util.BGASpaceItemDecoration;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.bingoogolapple.androidcommon.adapter.BGAOnItemChildClickListener;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
+
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_CROP_MODE;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_IMAGE_DIR;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_MAX_CHOOSE_COUNT;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_SELECTED_IMAGES;
 
 
 /**
@@ -40,12 +52,12 @@ import cn.bingoogolapple.androidcommon.adapter.BGAOnItemChildClickListener;
  * 创建时间:16/6/24 下午2:55
  * 描述:图片选择界面
  */
-public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAOnItemChildClickListener, BGAAsyncTask.Callback<ArrayList<BGAImageFolderModel>> {
-    private static final String EXTRA_IMAGE_DIR = "EXTRA_IMAGE_DIR";
-    private static final String EXTRA_SELECTED_IMAGES = "EXTRA_SELECTED_IMAGES";
-    private static final String EXTRA_MAX_CHOOSE_COUNT = "EXTRA_MAX_CHOOSE_COUNT";
-    private static final String EXTRA_PAUSE_ON_SCROLL = "EXTRA_PAUSE_ON_SCROLL";
-    private static final String EXTRA_CROP_MODE = "EXTRA_CROP_MODE";
+public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements
+        BGAOnItemChildClickListener, BGAAsyncTask.Callback<ArrayList<BGAImageFolderModel>>,
+        EasyPermissions.PermissionCallbacks {
+
+    private static final int REQUEST_CODE_PERMISSION_TAKE_PHOTO = 100;
+    private static final int REQUEST_CODE_STORAGE_PHOTO = 101;
 
     /**
      * 拍照的请求码
@@ -103,33 +115,6 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
     private boolean cropMode;
 
     /**
-     * @param context        应用程序上下文
-     * @param imageDir       拍照后图片保存的目录。如果传null表示没有拍照功能，如果不为null则具有拍照功能，
-     * @param maxChooseCount 图片选择张数的最大值
-     * @param selectedImages 当前已选中的图片路径集合，可以传null
-     * @param pauseOnScroll  滚动列表时是否暂停加载图片
-     * @return
-     */
-    public static Intent newIntent(Context context, File imageDir, int maxChooseCount, ArrayList<String> selectedImages, boolean pauseOnScroll) {
-        Intent intent = new Intent(context, BGAPhotoPickerActivity.class);
-        intent.putExtra(EXTRA_IMAGE_DIR, imageDir);
-        intent.putExtra(EXTRA_MAX_CHOOSE_COUNT, maxChooseCount);
-        intent.putStringArrayListExtra(EXTRA_SELECTED_IMAGES, selectedImages);
-        intent.putExtra(EXTRA_PAUSE_ON_SCROLL, pauseOnScroll);
-        return intent;
-    }
-
-    /**
-     * @param cropMode 是否是裁剪模式
-     * @return intent
-     */
-    public static Intent newIntent(Context context, File imageDir, boolean cropMode) {
-        Intent intent = newIntent(context, imageDir, 1, null, true);
-        intent.putExtra(EXTRA_CROP_MODE, cropMode);
-        return intent;
-    }
-
-    /**
      * 获取已选择的图片集合
      *
      * @param intent
@@ -150,9 +135,16 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         mPicAdapter = new BGAPhotoPickerAdapter(this, mContentRv);
         mPicAdapter.setOnItemChildClickListener(this);
 
-        if (getIntent().getBooleanExtra(EXTRA_PAUSE_ON_SCROLL, false)) {
-            mContentRv.addOnScrollListener(new BGARVOnScrollListener(this));
-        }
+        mContentRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    BGAImage.resume(BGAPhotoPickerActivity.this);
+                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    BGAImage.pause(BGAPhotoPickerActivity.this);
+                }
+            }
+        });
     }
 
     @Override
@@ -196,8 +188,7 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
     @Override
     protected void onStart() {
         super.onStart();
-        showLoadingDialog();
-        mLoadPhotoTask = new BGALoadPhotoTask(this, this, mTakePhotoEnabled).perform();
+        requestStoragePermission();
     }
 
     private void showLoadingDialog() {
@@ -292,10 +283,66 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
      * 拍照
      */
     private void takePhoto() {
-        try {
-            startActivityForResult(mImageCaptureManager.getTakePictureIntent(), REQUEST_CODE_TAKE_PHOTO);
-        } catch (Exception e) {
-            BGAPhotoPickerUtil.show(this, R.string.bga_pp_photo_not_support);
+        requestTakePhotoPermission();
+    }
+
+
+    @AfterPermissionGranted(REQUEST_CODE_PERMISSION_TAKE_PHOTO)
+    private void requestTakePhotoPermission() {
+        String[] perms = {Manifest.permission.CAMERA};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            try {
+                startActivityForResult(mImageCaptureManager.getTakePictureIntent(), REQUEST_CODE_TAKE_PHOTO);
+            } catch (Exception e) {
+                BGAPhotoPickerUtil.show(this, R.string.bga_pp_photo_not_support);
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(perms, REQUEST_CODE_PERMISSION_TAKE_PHOTO);
+            }
+        }
+    }
+
+    @AfterPermissionGranted(REQUEST_CODE_STORAGE_PHOTO)
+    private void requestStoragePermission() {
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            showLoadingDialog();
+            mLoadPhotoTask = new BGALoadPhotoTask(this, this, mTakePhotoEnabled).perform();
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(perms, REQUEST_CODE_STORAGE_PHOTO);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+
+        String text = "";
+
+        if (requestCode == REQUEST_CODE_STORAGE_PHOTO) {
+            text = "存储";
+        } else if (requestCode == REQUEST_CODE_PERMISSION_TAKE_PHOTO) {
+            text = "拍照";
+        }
+
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this)
+                    .setTitle("权限申请")
+                    .setRationale("您拒绝了 " + text + " 权限，如想正常使用，请在设置中打开")
+                    .build()
+                    .show();
         }
     }
 
@@ -311,7 +358,9 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
                     Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
                     Crop.of(source, destination).asSquare().start(this);
                 } else {
-                    startActivityForResult(BGAPhotoPickerPreviewActivity.newIntent(this, 1, photos, photos, 0, true), REQUEST_CODE_PREVIEW);
+                    startActivityForResult(
+                            PhotoPickerApi.pickPreviewIntent(this, 1, photos, photos, 0, true),
+                            REQUEST_CODE_PREVIEW);
                 }
             } else if (requestCode == REQUEST_CODE_PREVIEW) {
                 if (BGAPhotoPickerPreviewActivity.getIsFromTakePhoto(data)) {
@@ -458,7 +507,9 @@ public class BGAPhotoPickerActivity extends BGAPPToolbarActivity implements BGAO
         if (mCurrentImageFolderModel.isTakePhotoEnabled()) {
             currentPosition--;
         }
-        startActivityForResult(BGAPhotoPickerPreviewActivity.newIntent(this, mMaxChooseCount, mPicAdapter.getSelectedImages(), (ArrayList<String>) mPicAdapter.getData(), currentPosition, false), REQUEST_CODE_PREVIEW);
+        startActivityForResult(
+                PhotoPickerApi.pickPreviewIntent(this, mMaxChooseCount, mPicAdapter.getSelectedImages(), (ArrayList<String>) mPicAdapter.getData(), currentPosition, false),
+                REQUEST_CODE_PREVIEW);
     }
 
     /**

@@ -1,8 +1,6 @@
 package com.wuba.image.photopicker.imageloader;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.widget.ImageView;
@@ -25,13 +23,13 @@ public abstract class BGAImageLoader {
         return path;
     }
 
-    public abstract void displayImage(Activity activity, ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, DisplayDelegate delegate);
+    public abstract void displayImage(Context context, ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, DisplayDelegate delegate);
 
     public abstract void downloadImage(Context context, String path, DownloadDelegate delegate);
 
-    public abstract void pause(Activity activity);
+    public abstract void pause(Context context);
 
-    public abstract void resume(Activity activity);
+    public abstract void resume(Context context);
 
     public interface DisplayDelegate {
         void onSuccess(View view, String path);
@@ -40,7 +38,7 @@ public abstract class BGAImageLoader {
     }
 
     public interface DownloadDelegate {
-        void onSuccess(String path, Bitmap bitmap);
+        void onSuccess(String path, byte[] resource);
 
         void onFailed(String path);
     }

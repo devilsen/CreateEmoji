@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.wuba.image.R;
@@ -133,6 +134,7 @@ public abstract class PorterImageView extends ImageView {
                 }
             } catch (Exception e) {
                 String log = "Exception occured while drawing " + getId();
+                Log.e(TAG, log, e);
             } finally {
                 canvas.restoreToCount(saveCount);
             }

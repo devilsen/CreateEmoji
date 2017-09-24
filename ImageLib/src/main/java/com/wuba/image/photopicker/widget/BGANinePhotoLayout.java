@@ -116,7 +116,7 @@ public class BGANinePhotoLayout extends FrameLayout implements AdapterView.OnIte
             mPhotoIv.setMaxWidth(itemWidth * 2);
             mPhotoIv.setMaxHeight(itemWidth * 2);
 
-            BGAImage.displayImage(mActivity, mPhotoIv, photos.get(0), R.mipmap.bga_pp_ic_holder_light, R.mipmap.bg_pic_break, itemWidth * 2, itemWidth * 2, null);
+            BGAImage.displayImage(mActivity, mPhotoIv, photos.get(0), R.mipmap.bga_pp_ic_holder_light, R.mipmap.bg_pic_break, itemWidth * 2, itemWidth * 2);
         } else {
             setVisibility(VISIBLE);
             mPhotoIv.setVisibility(GONE);

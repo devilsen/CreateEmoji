@@ -22,8 +22,7 @@ import cn.bingoogolapple.androidcommon.adapter.BGAViewHolderHelper;
  */
 public class BGAPhotoPickerAdapter extends BGARecyclerViewAdapter<String> {
     private ArrayList<String> mSelectedImages = new ArrayList<>();
-    private int mImageWidth;
-    private int mImageHeight;
+    private int size;
     private boolean mTakePhotoEnabled;
     private Activity mActivity;
     /**
@@ -33,12 +32,13 @@ public class BGAPhotoPickerAdapter extends BGARecyclerViewAdapter<String> {
 
     public BGAPhotoPickerAdapter(Activity activity, RecyclerView recyclerView) {
         super(recyclerView, R.layout.bga_pp_item_photo_picker);
-        mImageWidth = BGAPhotoPickerUtil.getScreenWidth(recyclerView.getContext()) / 6;
-        mImageHeight = mImageWidth;
+        size = BGAPhotoPickerUtil.getScreenWidth(recyclerView.getContext()) / 6;
+
         mActivity = activity;
     }
 
-    public void setItemChildListener(BGAViewHolderHelper helper) {
+    @Override
+    public void setItemChildListener(BGAViewHolderHelper helper, int viewType) {
         helper.setItemChildClickListener(R.id.iv_item_photo_picker_flag);
         helper.setItemChildClickListener(R.id.iv_item_photo_picker_photo);
     }
@@ -55,7 +55,15 @@ public class BGAPhotoPickerAdapter extends BGARecyclerViewAdapter<String> {
         } else {
             helper.setVisibility(R.id.tv_item_photo_picker_tip, View.INVISIBLE);
             helper.getImageView(R.id.iv_item_photo_picker_photo).setScaleType(ImageView.ScaleType.CENTER_CROP);
-            BGAImage.displayImage(mActivity, helper.getImageView(R.id.iv_item_photo_picker_photo), model, R.mipmap.bga_pp_ic_holder_dark, R.mipmap.bg_pic_black_break, mImageWidth, mImageHeight, null);
+
+            BGAImage.displayImage(mActivity,
+                    helper.getImageView(R.id.iv_item_photo_picker_photo),
+                    model,
+                    R.mipmap.bga_pp_ic_holder_dark,
+                    R.mipmap.bg_pic_black_break,
+                    size,
+                    size,
+                    null);
 
             if (cropMode)
                 helper.setVisibility(R.id.iv_item_photo_picker_flag, View.GONE);

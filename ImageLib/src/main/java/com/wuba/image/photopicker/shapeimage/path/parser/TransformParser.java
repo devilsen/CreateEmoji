@@ -29,7 +29,7 @@ class TransformParser {
             NumberParse np = NumberParse.parseNumbers(s.substring("matrix(".length()));
             if (np.numbers.size() == 6) {
                 Matrix mat = new Matrix();
-                mat.setValues(new float[]{
+                mat.setValues(new float[] {
                         // Row 1
                         np.numbers.get(0),
                         np.numbers.get(2),
@@ -92,7 +92,7 @@ class TransformParser {
                 matrix.preTranslate(-cx, -cy);
             }
         } else {
-            Log.d(TAG, "Invalid transform (" + s + ")");
+            Log.w(TAG, "Invalid transform (" + s + ")");
         }
     }
 }

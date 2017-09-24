@@ -151,4 +151,24 @@ public class BGAPhotoPickerUtil {
     public static File getPhotoDir() {
         return new File(Environment.getExternalStorageDirectory(), "BGAPhotoPickerTakePhoto");
     }
+
+    /**
+     * 获取图片后缀
+     *
+     * @param url 原地址
+     * @return 图片后缀
+     */
+    public static String getSuffix(String url) {
+        String suffix = "png";
+        if (url.endsWith(".png")) {
+            suffix = ".png";
+        } else if (url.endsWith(".jpg")) {
+            suffix = ".jpg";
+        } else if (url.endsWith(".jpeg")) {
+            suffix = ".jpeg";
+        } else if (url.endsWith(".gif")) {
+            suffix = ".gif";
+        }
+        return suffix;
+    }
 }

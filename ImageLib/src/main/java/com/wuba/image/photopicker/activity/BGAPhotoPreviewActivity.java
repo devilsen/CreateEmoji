@@ -1,9 +1,10 @@
 package com.wuba.image.photopicker.activity;
 
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
@@ -11,10 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.wuba.image.R;
+import com.wuba.image.photopicker.PhotoPickerApi;
 import com.wuba.image.photopicker.adapter.BGAPhotoPageAdapter;
 import com.wuba.image.photopicker.imageloader.BGAImage;
 import com.wuba.image.photopicker.imageloader.BGAImageLoader;
@@ -25,26 +25,33 @@ import com.wuba.image.photopicker.widget.BGAHackyViewPager;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.AppSettingsDialog;
+import pub.devrel.easypermissions.EasyPermissions;
 import uk.co.senab.photoview.PhotoViewAttacher;
+
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_CURRENT_POSITION;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_IS_SELF;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_IS_SINGLE_PREVIEW;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_PHOTO_PATH;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_PREVIEW_IMAGES;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_SAVE_IMG_DIR;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/6/24 下午2:59
- * 描述:图片预览界面
+ * 描述:单张大图 预览界面
  */
-public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements PhotoViewAttacher.OnViewTapListener, BGAAsyncTask.Callback<Void> {
-    private static final String EXTRA_SAVE_IMG_DIR = "EXTRA_SAVE_IMG_DIR";
-    private static final String EXTRA_PREVIEW_IMAGES = "EXTRA_PREVIEW_IMAGES";
-    private static final String EXTRA_CURRENT_POSITION = "EXTRA_CURRENT_POSITION";
-    private static final String EXTRA_IS_SINGLE_PREVIEW = "EXTRA_IS_SINGLE_PREVIEW";
-    private static final String EXTRA_PHOTO_PATH = "EXTRA_PHOTO_PATH";
-    private static final String EXTRA_IS_SELF = "EXTRA_IS_SELF";
+public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements
+        PhotoViewAttacher.OnViewTapListener, BGAAsyncTask.Callback<Void>,
+        EasyPermissions.PermissionCallbacks {
 
     private static final int REQUEST_CODE_PHOTO_CROP = 3;
 
-    private TextView mTitleTv;
-    private ImageView mDownloadIv;
+    private static final int REQUEST_CODE_STORAGE_PHOTO = 101;
+
     private BGAHackyViewPager mContentHvp;
     private BGAPhotoPageAdapter mPhotoPageAdapter;
 
@@ -60,61 +67,6 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
      * 上一次标题栏显示或隐藏的时间戳
      */
     private long mLastShowHiddenTime;
-
-    /**
-     * 获取查看多张图片的intent
-     *
-     * @param context
-     * @param saveImgDir      保存图片的目录，如果传null，则没有保存图片功能
-     * @param previewImages   当前预览的图片目录里的图片路径集合
-     * @param currentPosition 当前预览图片的位置
-     * @return
-     */
-    public static Intent newIntent(Context context, File saveImgDir, ArrayList<String> previewImages, int currentPosition) {
-        Intent intent = new Intent(context, BGAPhotoPreviewActivity.class);
-        intent.putExtra(EXTRA_SAVE_IMG_DIR, saveImgDir);
-        intent.putStringArrayListExtra(EXTRA_PREVIEW_IMAGES, previewImages);
-        intent.putExtra(EXTRA_CURRENT_POSITION, currentPosition);
-        intent.putExtra(EXTRA_IS_SINGLE_PREVIEW, false);
-        return intent;
-    }
-
-    /**
-     * 获取查看单张图片的intent
-     *
-     * @param context
-     * @param saveImgDir 保存图片的目录，如果传null，则没有保存图片功能
-     * @param photoPath  图片路径
-     * @param isSelf     是否是自己
-     * @return
-     */
-    public static Intent newIntent(Context context, File saveImgDir, String photoPath, boolean isSelf) {
-        Intent intent = new Intent(context, BGAPhotoPreviewActivity.class);
-        intent.putExtra(EXTRA_SAVE_IMG_DIR, saveImgDir);
-        intent.putExtra(EXTRA_PHOTO_PATH, photoPath);
-        intent.putExtra(EXTRA_IS_SELF, isSelf);
-        intent.putExtra(EXTRA_CURRENT_POSITION, 0);
-        intent.putExtra(EXTRA_IS_SINGLE_PREVIEW, true);
-        return intent;
-    }
-
-    /**
-     * 获取查看单张图片的intent
-     *
-     * @param context
-     * @param saveImgDir 保存图片的目录，如果传null，则没有保存图片功能
-     * @param photoPath  图片路径
-     * @return
-     */
-    public static Intent newIntent(Context context, File saveImgDir, String photoPath) {
-        Intent intent = new Intent(context, BGAPhotoPreviewActivity.class);
-        intent.putExtra(EXTRA_SAVE_IMG_DIR, saveImgDir);
-        intent.putExtra(EXTRA_PHOTO_PATH, photoPath);
-        intent.putExtra(EXTRA_IS_SELF, false);
-        intent.putExtra(EXTRA_CURRENT_POSITION, 0);
-        intent.putExtra(EXTRA_IS_SINGLE_PREVIEW, true);
-        return intent;
-    }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
@@ -186,11 +138,11 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
         // Handle item selection
         int i = item.getItemId();
         if (i == R.id.item_photo_preview_select) {
-            startActivityForResult(BGAPhotoPickerActivity.newIntent(this, mSaveImgDir, true), REQUEST_CODE_PHOTO_CROP);//自己,修改头像
+            startActivityForResult(PhotoPickerApi.pickerIntent(this, true, true), REQUEST_CODE_PHOTO_CROP);//自己,修改头像
             return true;
         } else if (i == R.id.item_photo_preview_download) {
             if (mSavePhotoTask == null) {
-                savePic();
+                requestStoragePermission();
             }
             return true;
         } else {
@@ -213,8 +165,8 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK){
-            if (requestCode == REQUEST_CODE_PHOTO_CROP){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_PHOTO_CROP) {
                 setResult(RESULT_OK, data);
                 finish();
             }
@@ -259,10 +211,44 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
     public void onClick(View v) {
         if (v.getId() == R.id.iv_photo_preview_download) {
             if (mSavePhotoTask == null) {
-                savePic();
+                requestStoragePermission();
             }
         }
     }
+
+    @AfterPermissionGranted(REQUEST_CODE_STORAGE_PHOTO)
+    private void requestStoragePermission() {
+        String[] perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (EasyPermissions.hasPermissions(this, perms)) {
+            savePic();
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(perms, REQUEST_CODE_STORAGE_PHOTO);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            new AppSettingsDialog.Builder(this)
+                    .setTitle("权限申请")
+                    .setRationale("您拒绝了 存储 权限，如想正常使用，请在设置中打开")
+                    .build()
+                    .show();
+        }
+    }
+
 
     private synchronized void savePic() {
         if (mSavePhotoTask != null) {
@@ -280,7 +266,7 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
         }
 
         // 通过MD5加密url生成文件名，避免多次保存同一张图片
-        file = new File(mSaveImgDir, BGAPhotoPickerUtil.md5(url) + ".png");
+        file = new File(mSaveImgDir, BGAPhotoPickerUtil.md5(url) + BGAPhotoPickerUtil.getSuffix(url));
         if (file.exists()) {
             BGAPhotoPickerUtil.showSafe(this, getString(R.string.bga_pp_save_img_success_folder, mSaveImgDir.getAbsolutePath()));
             return;
@@ -288,9 +274,10 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
 
         mSavePhotoTask = new BGASavePhotoTask(this, this, file);
         BGAImage.downloadImage(this, url, new BGAImageLoader.DownloadDelegate() {
+
             @Override
-            public void onSuccess(String url, Bitmap bitmap) {
-                mSavePhotoTask.setBitmapAndPerform(bitmap);
+            public void onSuccess(String path, byte[] resource) {
+                mSavePhotoTask.setBitmapAndPerform(resource);
             }
 
             @Override
@@ -299,6 +286,50 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
                 BGAPhotoPickerUtil.show(BGAPhotoPreviewActivity.this, R.string.bga_pp_save_img_failure);
             }
         });
+    }
+
+    private void savePicAndForward() {
+        if (mSavePhotoTask != null) {
+            return;
+        }
+
+        final String url = mPhotoPageAdapter.getItem(mContentHvp.getCurrentItem());
+        File file;
+        if (url.startsWith("file")) {
+            file = new File(url.replace("file://", ""));
+            if (file.exists()) {
+                gotoForward(file.getAbsolutePath());
+                return;
+            }
+        }
+
+        // 通过MD5加密url生成文件名，避免多次保存同一张图片
+        file = new File(mSaveImgDir, BGAPhotoPickerUtil.md5(url) + BGAPhotoPickerUtil.getSuffix(url));
+        if (file.exists()) {
+            gotoForward(file.getAbsolutePath());
+            return;
+        }
+
+        mSavePhotoTask = new BGASavePhotoTask(this, this, file);
+        BGAImage.downloadImage(this, url, new BGAImageLoader.DownloadDelegate() {
+
+            @Override
+            public void onSuccess(String path, byte[] resource) {
+                mSavePhotoTask.setBitmapAndPerform(resource);
+            }
+
+            @Override
+            public void onFailed(String url) {
+                mSavePhotoTask = null;
+                BGAPhotoPickerUtil.show(BGAPhotoPreviewActivity.this, R.string.bga_pp_save_img_failure);
+            }
+        });
+    }
+
+    private void gotoForward(String filePath) {
+        Intent intent = new Intent("com.crm.wuba.forward");
+        intent.putExtra("imagePath", filePath);
+        startActivity(intent);
     }
 
     @Override
@@ -318,8 +349,6 @@ public class BGAPhotoPreviewActivity extends BGAPPToolbarActivity implements Pho
             mSavePhotoTask = null;
         }
 
-        mTitleTv = null;
-        mDownloadIv = null;
         mContentHvp = null;
         mPhotoPageAdapter = null;
         mSaveImgDir = null;

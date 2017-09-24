@@ -1,6 +1,5 @@
 package com.wuba.image.photopicker.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
@@ -23,17 +22,19 @@ import java.util.ArrayList;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_CURRENT_POSITION;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_IS_FROM_TAKE_PHOTO;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_MAX_CHOOSE_COUNT;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_PREVIEW_IMAGES;
+import static com.wuba.image.photopicker.activity.PhotoPickerConstant.EXTRA_SELECTED_IMAGES;
+
+
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com
  * 创建时间:16/6/24 下午2:57
- * 描述:图片选择预览界面
+ * 描述:单张大图 预览并选择 界面
  */
 public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implements PhotoViewAttacher.OnViewTapListener {
-    private static final String EXTRA_PREVIEW_IMAGES = "EXTRA_PREVIEW_IMAGES";
-    private static final String EXTRA_SELECTED_IMAGES = "EXTRA_SELECTED_IMAGES";
-    private static final String EXTRA_MAX_CHOOSE_COUNT = "EXTRA_MAX_CHOOSE_COUNT";
-    private static final String EXTRA_CURRENT_POSITION = "EXTRA_CURRENT_POSITION";
-    private static final String EXTRA_IS_FROM_TAKE_PHOTO = "EXTRA_IS_FROM_TAKE_PHOTO";
 
     private TextView mTitleTv;
     private TextView mSubmitTv;
@@ -59,43 +60,6 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
      */
     private boolean mIsFromTakePhoto;
 
-    /**
-     * @param context         应用程序上下文
-     * @param maxChooseCount  图片选择张数的最大值
-     * @param selectedImages  当前已选中的图片路径集合，可以传null
-     * @param previewImages   当前预览的图片目录里的图片路径集合
-     * @param currentPosition 当前预览图片的位置
-     * @param isFromTakePhoto 是否是拍完照后跳转过来
-     * @return
-     */
-    public static Intent newIntent(Context context, int maxChooseCount, ArrayList<String> selectedImages, ArrayList<String> previewImages, int currentPosition, boolean isFromTakePhoto) {
-        Intent intent = new Intent(context, BGAPhotoPickerPreviewActivity.class);
-        intent.putStringArrayListExtra(EXTRA_SELECTED_IMAGES, selectedImages);
-        intent.putStringArrayListExtra(EXTRA_PREVIEW_IMAGES, previewImages);
-        intent.putExtra(EXTRA_MAX_CHOOSE_COUNT, maxChooseCount);
-        intent.putExtra(EXTRA_CURRENT_POSITION, currentPosition);
-        intent.putExtra(EXTRA_IS_FROM_TAKE_PHOTO, isFromTakePhoto);
-        return intent;
-    }
-
-    /**
-     * 预览一张图片
-     *
-     * @param context context
-     * @param path    图片路径
-     * @return intent
-     */
-    public static Intent newIntent(Context context, String path) {
-        Intent intent = new Intent(context, BGAPhotoPickerPreviewActivity.class);
-        ArrayList<String> list = new ArrayList<>();
-        list.add(path);
-        intent.putStringArrayListExtra(EXTRA_SELECTED_IMAGES, list);
-        intent.putStringArrayListExtra(EXTRA_PREVIEW_IMAGES, list);
-        intent.putExtra(EXTRA_MAX_CHOOSE_COUNT, 1);
-        intent.putExtra(EXTRA_CURRENT_POSITION, 1);
-        intent.putExtra(EXTRA_IS_FROM_TAKE_PHOTO, false);
-        return intent;
-    }
 
     /**
      * 获取已选择的图片集合
@@ -214,7 +178,7 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
 
                     mSelectedImages.clear();
                     mSelectedImages.add(currentImage);
-                    mChooseTv.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.bga_pp_ic_cb_checked, 0, 0, 0);
+                    mChooseTv.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.bga_pp_ic_cb_yellow_checked, 0, 0, 0);
                     renderTopRightBtn();
                 } else {
                     // 多选
@@ -223,7 +187,7 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
                         BGAPhotoPickerUtil.show(this, getString(R.string.bga_pp_toast_photo_picker_max, mMaxChooseCount));
                     } else {
                         mSelectedImages.add(currentImage);
-                        mChooseTv.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.bga_pp_ic_cb_checked, 0, 0, 0);
+                        mChooseTv.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.bga_pp_ic_cb_yellow_checked, 0, 0, 0);
                         renderTopRightBtn();
                     }
                 }
@@ -247,7 +211,7 @@ public class BGAPhotoPickerPreviewActivity extends BGAPPToolbarActivity implemen
 
         mTitleTv.setText((mContentHvp.getCurrentItem() + 1) + "/" + mPhotoPageAdapter.getCount());
         if (mSelectedImages.contains(mPhotoPageAdapter.getItem(mContentHvp.getCurrentItem()))) {
-            mChooseTv.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.bga_pp_ic_cb_checked, 0, 0, 0);
+            mChooseTv.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.bga_pp_ic_cb_yellow_checked, 0, 0, 0);
         } else {
             mChooseTv.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.bga_pp_ic_cb_normal, 0, 0, 0);
         }

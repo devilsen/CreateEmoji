@@ -1,6 +1,5 @@
 package com.wuba.image.photopicker.imageloader;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
@@ -13,7 +12,7 @@ import android.widget.ImageView;
 public class BGAPicassoImageLoader extends BGAImageLoader {
 
     @Override
-    public void displayImage(Activity activity, final ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, final DisplayDelegate delegate) {
+    public void displayImage(Context context, final ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, final DisplayDelegate delegate) {
 //        final String finalPath = getPath(path);
 //        Picasso.with(activity).load(finalPath).tag(activity).placeholder(loadingResId).error(failResId).resize(width, height).centerInside().into(imageView, new Callback.EmptyCallback() {
 //            @Override
@@ -50,12 +49,12 @@ public class BGAPicassoImageLoader extends BGAImageLoader {
     }
 
     @Override
-    public void pause(Activity activity) {
+    public void pause(Context context) {
 //        Picasso.with(activity).pauseTag(activity);
     }
 
     @Override
-    public void resume(Activity activity) {
+    public void resume(Context context) {
 //        Picasso.with(activity).resumeTag(activity);
     }
 }

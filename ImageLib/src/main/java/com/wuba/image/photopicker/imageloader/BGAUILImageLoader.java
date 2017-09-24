@@ -1,6 +1,5 @@
 package com.wuba.image.photopicker.imageloader;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
@@ -21,7 +20,7 @@ public class BGAUILImageLoader extends BGAImageLoader {
     }
 
     @Override
-    public void displayImage(Activity activity, ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, final DisplayDelegate delegate) {
+    public void displayImage(Context context, ImageView imageView, String path, @DrawableRes int loadingResId, @DrawableRes int failResId, int width, int height, final DisplayDelegate delegate) {
 //        initImageLoader(activity);
 //
 //        DisplayImageOptions options = new DisplayImageOptions.Builder()
@@ -63,14 +62,14 @@ public class BGAUILImageLoader extends BGAImageLoader {
     }
 
     @Override
-    public void pause(Activity activity) {
-        initImageLoader(activity);
+    public void pause(Context context) {
+//        initImageLoader(activity);
 //        ImageLoader.getInstance().pause();
     }
 
     @Override
-    public void resume(Activity activity) {
-        initImageLoader(activity);
+    public void resume(Context context) {
+//        initImageLoader(activity);
 //        ImageLoader.getInstance().resume();
     }
 }

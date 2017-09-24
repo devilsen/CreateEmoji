@@ -2,6 +2,7 @@ package com.wuba.image.photopicker.shapeimage.path.parser;
 
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.util.Log;
 
 class PathParser {
 
@@ -223,6 +224,7 @@ class PathParser {
                     break;
                 }
                 default:
+                    Log.w(TAG, "Invalid path command: " + cmd);
                     ph.advance();
             }
             if (!wasCurve) {

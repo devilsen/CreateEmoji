@@ -2,7 +2,6 @@ package com.wuba.image.photopicker.util;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.provider.MediaStore;
@@ -14,8 +13,6 @@ import com.wuba.image.photopicker.model.BGAImageFolderModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
 
 
 /**
@@ -34,32 +31,48 @@ public class BGALoadPhotoTask extends BGAAsyncTask<Void, ArrayList<BGAImageFolde
         mTakePhotoEnabled = takePhotoEnabled;
     }
 
-    private static boolean isImageFile(String path) {
+    private static boolean isNotImageFile(String path) {
+        if (TextUtils.isEmpty(path)) {
+            return true;
+        }
+        File file = new File(path);
+        return !file.exists() || file.length() == 0;
         // 获取图片的宽和高，但不把图片加载到内存中
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-        return options.outMimeType != null;
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inJustDecodeBounds = true;
+//        BitmapFactory.decodeFile(path, options);
+//        return options.outMimeType == null;
     }
 
     @Override
     protected ArrayList<BGAImageFolderModel> doInBackground(Void... voids) {
-        ArrayList<BGAImageFolderModel> imageFolderModels = new ArrayList();
+        ArrayList<BGAImageFolderModel> imageFolderModels = new ArrayList<>();
         BGAImageFolderModel allImageFolderModel = new BGAImageFolderModel(mTakePhotoEnabled);
+        allImageFolderModel.name = mContext.getString(R.string.bga_pp_all_image);
+        imageFolderModels.add(allImageFolderModel);
         HashMap<String, BGAImageFolderModel> imageFolderModelMap = new HashMap<>();
 
         Cursor cursor = null;
         try {
-            cursor = mContext.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Images.Media.DATA}, null, null, MediaStore.Images.Media.DATE_ADDED + " DESC");
+            cursor = mContext.getContentResolver().query(
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                    new String[]{MediaStore.Images.Media.DATA},
+                    MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=? or " + MediaStore.Images.Media.MIME_TYPE + "=?",
+                    new String[]{"image/jpeg", "image/png", "image/jpg"},
+                    MediaStore.Images.Media.DATE_ADDED + " DESC"
+            );
+
             BGAImageFolderModel otherImageFolderModel;
             if (cursor != null && cursor.getCount() > 0) {
                 boolean firstInto = true;
                 while (cursor.moveToNext()) {
                     String imagePath = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
 
-                    if (!TextUtils.isEmpty(imagePath) && isImageFile(imagePath)) {
+                    if (isNotImageFile(imagePath)) {
+                        continue;
+                    }
+
                         if (firstInto) {
-                            allImageFolderModel.name = mContext.getString(R.string.bga_pp_all_image);
                             allImageFolderModel.coverPath = imagePath;
                             firstInto = false;
                         }
@@ -94,16 +107,11 @@ public class BGALoadPhotoTask extends BGAAsyncTask<Void, ArrayList<BGAImageFolde
                             otherImageFolderModel.addLastImage(imagePath);
                         }
                     }
-                }
 
                 // 添加所有图片目录
-                imageFolderModels.add(allImageFolderModel);
 
                 // 添加其他图片目录
-                Iterator<Map.Entry<String, BGAImageFolderModel>> iterator = imageFolderModelMap.entrySet().iterator();
-                while (iterator.hasNext()) {
-                    imageFolderModels.add(iterator.next().getValue());
-                }
+                imageFolderModels.addAll(imageFolderModelMap.values());
             }
         } catch (Exception e) {
             e.printStackTrace();

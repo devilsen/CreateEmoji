@@ -1,6 +1,7 @@
 package com.wuba.image.photopicker.imageloader;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 /**
@@ -9,18 +10,18 @@ import android.support.v7.widget.RecyclerView;
  * 描述:
  */
 public class BGARVOnScrollListener extends RecyclerView.OnScrollListener {
-    private Activity mActivity;
+    private Context context;
 
     public BGARVOnScrollListener(Activity activity) {
-        mActivity = activity;
+        context = activity;
     }
 
     @Override
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-            BGAImage.resume(mActivity);
+            BGAImage.resume(context);
         } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-            BGAImage.pause(mActivity);
+            BGAImage.pause(context);
         }
     }
 }

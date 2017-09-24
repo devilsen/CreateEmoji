@@ -200,7 +200,8 @@ public class BGASortableNinePhotoLayout extends RecyclerView implements BGAOnIte
             mImageHeight = mImageWidth;
         }
 
-        protected void setItemChildListener(BGAViewHolderHelper helper) {
+        @Override
+        protected void setItemChildListener(BGAViewHolderHelper helper, int type) {
             helper.setItemChildClickListener(R.id.iv_item_nine_photo_flag);
         }
 
