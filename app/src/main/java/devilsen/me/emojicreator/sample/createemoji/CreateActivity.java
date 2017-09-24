@@ -3,8 +3,10 @@ package devilsen.me.emojicreator.sample.createemoji;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -145,6 +148,8 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         imgWidth = getIntent().getIntExtra("width", 100);
         imgHeight = getIntent().getIntExtra("height", 100);
 
+//        path = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1506247968231&di=1dc44ce1b5eee99e88def198ce3ee42b&imgtype=0&src=http%3A%2F%2Fimg.haatoo.com%2Fpics%2F2016%2F08%2F28%2Fd%2Fd5ccb3268a832222bb139e6cdc2efadf.jpg";
+
         if (imgHeight <= 300) {
             imgWidth = imgWidth * 4;
             imgHeight = imgHeight * 4;
@@ -176,8 +181,8 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
                 public void onNewResultImpl(@Nullable Bitmap bitmap) {
                     // You can use the bitmap in only limited ways
                     // No need to do any cleanup.
-                    sourceImg.setImageBitmap(bitmap);
-                    sourceBitmap = bitmap;
+                    changeSourceSize(bitmap);
+                    sourceImg.setImageBitmap(sourceBitmap);
                     initCanvas();
                     handler.sendEmptyMessage(1);
                 }
@@ -189,33 +194,25 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
 
             }, CallerThreadExecutor.getInstance());
 
-
-//            Glide.with(this)
-//                    .load(path)
-//                    .asBitmap()
-//                    .dontAnimate()
-//                    .error(R.mipmap.emoji_creator_icon_2)
-//                    .fitCenter()
-//                    .into(new SimpleTarget<Bitmap>(imgWidth, imgHeight) {
-//                        @Override
-//                        public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-//                            sourceImg.setImageBitmap(resource);
-//                            sourceBitmap = resource;
-//                            initCanvas();
-//                            loadingLayout.setVisibility(View.GONE);
-//                            jokeEdit.setVisibility(View.VISIBLE);
-//                            fontSizeCb.setEnabled(true);
-//                            selectColorCb.setEnabled(true);
-//                            doneBtn.setEnabled(true);
-//                            saveBtn.setEnabled(true);
-//                        }
-//                    });
         } else {
             Toast.makeText(this, "载入图片错误", Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void activationViews(){
+    private void changeSourceSize(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+
+        float widthScale = (float) imgWidth / width;
+        float heightScale = (float) imgHeight / height;
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(widthScale, heightScale);
+
+        sourceBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+    }
+
+    private void activationViews() {
 
         loadingLayout.setVisibility(View.GONE);
         jokeEdit.setVisibility(View.VISIBLE);
@@ -254,7 +251,7 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         colorAdapter.setColorListener(new SelectColorAdapter.SelectColorListener() {
             @Override
             public void getSelectColor(int colorId) {
-                textPaintColor = getResources().getColor(colorId);
+                textPaintColor = ContextCompat.getColor(CreateActivity.this, colorId);
                 jokeEdit.setTextColor(textPaintColor);
                 textPaint.setColor(textPaintColor);
 
@@ -306,11 +303,13 @@ public class CreateActivity extends BaseActivity implements View.OnClickListener
         canvasPaint = new Paint();
         canvasPaint.setFilterBitmap(true);
 
-        textPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DEV_KERN_TEXT_FLAG);
+        textPaint = new Paint();
         textPaint.setTypeface(Typeface.DEFAULT_BOLD);
         textPaint.setColor(Color.BLACK);
-        textPaint.setAntiAlias(false);
+//        textPaint.setAntiAlias(false);
         textPaint.setTextSize(jokeEdit.getTextSize());
+        textPaint.setMaskFilter(new BlurMaskFilter(4f, BlurMaskFilter.Blur.INNER));
+
     }
 
     private void initTxtPosition() {

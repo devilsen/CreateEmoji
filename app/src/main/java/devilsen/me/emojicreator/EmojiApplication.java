@@ -2,6 +2,8 @@ package devilsen.me.emojicreator;
 
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
@@ -20,6 +22,12 @@ import okhttp3.OkHttpClient;
 public class EmojiApplication extends Application {
 
     private static EmojiApplication INSTANCE;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

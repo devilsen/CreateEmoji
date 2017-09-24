@@ -17,8 +17,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".sample.emojilist.MainActivity">
+        <activity android:name=".sample.emojilist.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +28,9 @@
 
         <activity
             android:name=".sample.createemoji.CreateActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan">
+
+        </activity>
 
         <activity
             android:name=".sample.user.login.LoginActivity"

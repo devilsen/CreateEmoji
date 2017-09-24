@@ -30,14 +30,14 @@ ext{
     buildToolsVersion = '25.0.2'
 
     // App dependencies
-    supportLibraryVersion = '25.3.0'
+    supportLibraryVersion = '25.3.1'
     rxjavaVersion = '1.1.8'
     rxandroidVersion = '1.2.1'
     storioVersion = '1.12.3'
     guavaVersion = '18.0'
     retrofitVersion = '2.2.0'
     okhttpVersion = '3.6.0'
-    frescoVersion = '1.1.0'
+    frescoVersion = '1.5.0'
     sqlbriteVersion = '1.1.1'
     progressVersion = '1.7'
     glideVersion = '3.7.0'
